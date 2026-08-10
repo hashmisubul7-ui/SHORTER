@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHORTER — Read Less. Know More.</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#17171c;background:#fff}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+nav{height:68px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;background:#fffffff2;backdrop-filter:blur(12px);z-index:5}
+.logo{font-size:22px;font-weight:800}.logo span{color:#635bdb}nav div{display:flex;gap:22px;color:#666;font-size:14px}nav a{text-decoration:none;color:inherit}
+.btn{padding:11px 17px;border-radius:11px;font-weight:700}.primary{background:#635bdb;color:white}.light{background:#f2f2f5;color:#222}
+.hero{text-align:center;padding:78px 7%;background:linear-gradient(#fff,#faf9ff)}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#635bdb}
+h1{font-size:clamp(48px,8vw,84px);line-height:.95;letter-spacing:-5px;margin:16px 0}h1 span{color:#635bdb}
+.hero p{max-width:650px;margin:0 auto 28px;color:#666;font-size:18px}.tabs{display:flex;justify-content:center;gap:7px;margin:20px}.tab{padding:9px 14px;border-radius:10px;background:#eeeef3}.tab.active{background:#17171c;color:#fff}
+.box{max-width:850px;margin:auto;background:#fff;border:1px solid #dddde5;border-radius:18px;padding:14px;text-align:left;box-shadow:0 18px 50px #2221}
+textarea{width:100%;min-height:210px;border:0;outline:0;resize:vertical;padding:12px;font-size:15px}.bottom{border-top:1px solid #eee;padding-top:10px;display:flex;justify-content:space-between;gap:10px}.actions{display:flex;gap:8px}
+select{padding:8px;border:1px solid #ddd;border-radius:9px;background:#fff}.result{display:none;border-top:1px solid #eee;margin-top:15px;padding-top:15px}.result.show{display:block}.summary{white-space:pre-wrap;line-height:1.7}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#f0effa;color:#635bdb;font-size:11px;font-weight:700}
+section{padding:70px 7%}.head{margin-bottom:25px}.head h2{font-size:32px;margin:6px 0}.muted{color:#777}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid #e8e8ee;border-radius:18px;padding:22px}.pricing{background:#faf9ff}.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.plan{background:white;border:1px solid #e2e2e8;border-radius:20px;padding:23px}.plan.featured{border:2px solid #635bdb}.plan strong{display:block;font-size:40px;margin:8px 0}.plan small{display:block;color:#777;margin-bottom:18px}
+footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;position:fixed;inset:0;background:#1118;place-items:center;padding:20px;z-index:10}.modal.show{display:grid}.modalbox{background:#fff;padding:25px;border-radius:20px;max-width:420px;width:100%}
+@media(max-width:800px){nav div{display:none}.cards{grid-template-columns:1fr}.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){nav{padding:0 18px}.hero,section{padding-left:20px;padding-right:20px}.plans{grid-template-columns:1fr}.bottom{flex-direction:column}.actions button{flex:1}}
+.dashboard{display:none;min-height:70vh;padding:70px 7%;background:#faf9ff}.dashboard.show{display:block}.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;max-width:1000px}.dash-card{background:#fff;border:1px solid #e4e4eb;border-radius:18px;padding:24px}.dash-card strong{display:block;font-size:28px;margin:8px 0}.userbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.auth-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0 12px}.auth-msg{font-size:13px;color:#777;min-height:20px}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+<a class="logo" href="#">SH<span>O</span>RTER</a>
+<div><a href="#summarize">Summarize</a><a href="#features">Features</a><a href="#pricing">Pro</a></div>
+<button class="btn light" onclick="currentUser?showDashboard():openAuth()" id="authBtn">Sign in</button>
+</nav>
+
+<div class="hero" id="summarize">
+<span class="eyebrow">READ LESS • KNOW MORE</span>
+<h1>Make long articles<br><span>SHORTER.</span></h1>
+<p>Turn long news articles and text into quick, readable summaries focused on the main things.</p>
+<div class="tabs"><button class="tab active" onclick="mode(this,'text')">Paste text</button><button class="tab" onclick="mode(this,'url')">Article link</button></div>
+<div class="box">
+<textarea id="input" placeholder="Paste a long article here..."></textarea>
+<div class="bottom">
+<label>Length: <select id="length"><option value="short">Very short</option><option value="medium" selected>Balanced</option><option value="long">Detailed</option></select></label>
+<div class="actions"><button class="btn light" onclick="clearText()">Clear</button><button class="btn primary" onclick="summarize()">Make it shorter →</button></div>
+</div>
+<div class="result" id="result"><span class="tag">SUMMARY</span><h3>Main things</h3><div class="summary" id="summary"></div><button class="btn light" onclick="copySummary()">Copy</button></div>
+</div>
+</div>
+
+<section id="features"><div class="head"><span class="eyebrow">SIMPLE BY DESIGN</span><h2>Everything important. Nothing extra.</h2></div>
+<div class="cards"><div class="card"><span class="tag">01</span><h3>Choose your length</h3><p class="muted">Very short, balanced or detailed.</p></div><div class="card"><span class="tag">02</span><h3>Focus on the main things</h3><p class="muted">Extracts key sentences and removes filler.</p></div><div class="card"><span class="tag">03</span><h3>Fast & clean</h3><p class="muted">Designed for mobile and desktop.</p></div></div></section>
+
+<section class="pricing" id="pricing"><div class="head"><span class="eyebrow">SHORTER PRO</span><h2>More reading power.</h2><p class="muted">Free accounts get 3 summaries per day. Pro can unlock higher limits and extra features.</p></div>
+<div class="plans">
+<div class="plan"><b>1 MONTH</b><strong>₹39</strong><small>per month</small><button class="btn light" onclick="show('SHORTER Pro','You selected ₹39/month. Connect payments before accepting real payments.')">Choose</button></div>
+<div class="plan"><b>3 MONTHS</b><strong>₹99</strong><small>₹33/month</small><button class="btn light" onclick="show('SHORTER Pro','You selected ₹99/3 months.')">Choose</button></div>
+<div class="plan featured"><b>6 MONTHS ⭐</b><strong>₹189</strong><small>₹31.50/month</small><button class="btn primary" onclick="show('SHORTER Pro','You selected ₹189/6 months.')">Choose</button></div>
+<div class="plan"><b>1 YEAR</b><strong>₹359</strong><small>₹29.92/month</small><button class="btn light" onclick="show('SHORTER Pro','You selected ₹359/year.')">Choose</button></div>
+</div></section>
+
+<div class="dashboard" id="dashboard"><div class="userbar"><div><span class="eyebrow">YOUR ACCOUNT</span><h2 id="welcomeName">Welcome back!</h2><p class="muted" id="accountEmail"></p></div><button class="btn light" onclick="logout()">Log out</button></div><div class="dashboard-grid"><div class="dash-card"><span class="tag">SUMMARIES</span><strong id="summaryCount">0</strong><span class="muted">Summaries used this session</span></div><div class="dash-card"><span class="tag">PLAN</span><strong id="planName">Free</strong><span class="muted">Your current SHORTER plan</span></div><div class="dash-card"><span class="tag">PRO</span><strong>₹39+</strong><span class="muted">Choose a Pro plan below</span><button class="btn primary" style="margin-top:15px" onclick="scrollToPricing()">View Pro plans</button></div></div></div>
+<footer><b>SHORTER</b> — Read Less. Know More.<p>This is a front-end prototype. Real AI summarization, accounts, payments and article extraction require backend services.</p></footer>
+
+<div class="modal" id="authModal"><div class="modalbox"><h2 id="authTitle">Sign in to SHORTER</h2><p class="muted">Create an account or sign in to continue.</p><input class="auth-input" id="authName" placeholder="Your name" style="display:none"><input class="auth-input" id="authEmail" type="email" placeholder="Email"><input class="auth-input" id="authPassword" type="password" placeholder="Password"><div class="actions"><button class="btn light" onclick="closeAuth()">Cancel</button><button class="btn primary" onclick="submitAuth()">Continue</button></div><p class="auth-msg" id="authMsg"></p><button id="authSwitch" class="btn light" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">Create account</button></div></div>
+<div class="modal" id="modal"><div class="modalbox"><h2 id="mt"></h2><p id="mx"></p><button class="btn primary" onclick="closeModal()">Close</button></div></div>
+
+<script>
+let currentMode='text',used=Number(sessionStorage.getItem('shorterUsed')||0),authMode='login';
+let currentUser=JSON.parse(localStorage.getItem('shorterUser')||'null');
+function mode(b,m){currentMode=m;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('input').placeholder=m==='url'?'Paste an article URL here...':'Paste a long article here...'}
+function summarize(){let text=document.getElementById('input').value.trim();if(!text)return show('Nothing to summarize','Paste an article or text first.');if(used>=3&&!isPro())return show('Daily limit reached','Free accounts can use 3 summaries per day in this prototype.');if(currentMode==='url')return show('Article link mode','URL extraction needs a backend. Paste the article text for this demo.');used++;sessionStorage.setItem('shorterUsed',used);let s=text.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+/g)||[text],v=document.getElementById('length').value,n=v==='short'?Math.max(1,Math.ceil(s.length*.2)):v==='medium'?Math.max(2,Math.ceil(s.length*.4)):Math.max(3,Math.ceil(s.length*.6));document.getElementById('summary').textContent=s.slice(0,n).map(x=>'• '+x.trim()).join('\n');document.getElementById('result').classList.add('show');updateDashboard()}
+function clearText(){document.getElementById('input').value='';document.getElementById('result').classList.remove('show')}function copySummary(){navigator.clipboard?.writeText(document.getElementById('summary').textContent);show('Copied!','Summary copied to clipboard.')}
+function show(t,x){document.getElementById('mt').textContent=t;document.getElementById('mx').textContent=x;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
+function openAuth(m='login'){authMode=m;document.getElementById('authTitle').textContent=m==='login'?'Sign in to SHORTER':'Create your SHORTER account';document.getElementById('authName').style.display=m==='login'?'none':'block';document.getElementById('authSwitch').textContent=m==='login'?'Create account':'Already have an account? Sign in';document.getElementById('authMsg').textContent='';document.getElementById('authModal').classList.add('show')}
+function closeAuth(){document.getElementById('authModal').classList.remove('show')}function toggleAuthMode(){openAuth(authMode==='login'?'signup':'login')}
+function submitAuth(){let name=document.getElementById('authName').value.trim(),email=document.getElementById('authEmail').value.trim().toLowerCase(),password=document.getElementById('authPassword').value,msg=document.getElementById('authMsg');if(!email||!password||(authMode==='signup'&&!name)){msg.textContent='Please fill in all required fields.';return}if(password.length<6){msg.textContent='Password must be at least 6 characters.';return}let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(authMode==='signup'){if(users[email]){msg.textContent='Account already exists.';return}users[email]={name,email,password,plan:'Free'};localStorage.setItem('shorterUsers',JSON.stringify(users))}else if(!users[email]||users[email].password!==password){msg.textContent='Incorrect email or password.';return}currentUser=users[email];localStorage.setItem('shorterUser',JSON.stringify(currentUser));closeAuth();showDashboard();let pending=localStorage.getItem('shorterPendingPlan');if(pending)choosePro(pending)}
+function logout(){currentUser=null;localStorage.removeItem('shorterUser');document.getElementById('dashboard').classList.remove('show');document.getElementById('authBtn').textContent='Sign in';window.scrollTo({top:0,behavior:'smooth'})}
+function showDashboard(){if(!currentUser)return;document.getElementById('dashboard').classList.add('show');document.getElementById('authBtn').textContent='Dashboard';updateDashboard();document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})}
+function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free'}
+function isPro(){return currentUser&&currentUser.plan==='Pro'}function scrollToPricing(){document.getElementById('pricing').scrollIntoView({behavior:'smooth'})}
+function choosePlan(plan){if(!currentUser){localStorage.setItem('shorterPendingPlan',plan);openAuth('login');return}choosePro(plan)}
+function choosePro(plan){currentUser.plan='Pro';localStorage.setItem('shorterUser',JSON.stringify(currentUser));let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(users[currentUser.email]){users[currentUser.email].plan='Pro';localStorage.setItem('shorterUsers',JSON.stringify(users))}localStorage.removeItem('shorterPendingPlan');showDashboard();show('SHORTER Pro','Demo activation complete for '+plan+'. Connect a real payment provider before accepting real payments.')}
+function creatorTrial(){if(!currentUser)return openAuth('signup');choosePro('30-day Creator Pro trial')}
+function downloadWallpaper(name){show('Download selected',name+' — connect file storage to enable real downloads.')}
+function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
+window.addEventListener('load',()=>{if(currentUser)showDashboard()});
+</script>
+</body>
+</html>
