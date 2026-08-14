@@ -10,7 +10,7 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
 nav{height:68px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;background:#fffffff2;backdrop-filter:blur(12px);z-index:5}
 .logo{font-size:22px;font-weight:800}.logo span{color:#635bdb}nav div{display:flex;gap:22px;color:#666;font-size:14px}nav a{text-decoration:none;color:inherit}
 .btn{padding:11px 17px;border-radius:11px;font-weight:700}.primary{background:#635bdb;color:white}.light{background:#f2f2f5;color:#222}
-.hero{text-align:center;padding:78px 7%;background:linear-gradient(#fff,#faf9ff)}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#635bdb}
+.hero{text-align:center;padding:78px 7%;background:linear-gradient(#fff,#faf9ff)}.home-choices{max-width:900px;margin:32px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}.choice-card{background:#fff;border:1px solid #e2e2e8;border-radius:22px;padding:25px;box-shadow:0 16px 45px #2221}.choice-card h2{margin:10px 0 6px}.choice-card p{color:#666;min-height:44px}.choice-card button{width:100%;margin-top:10px;position:relative;z-index:3;pointer-events:auto}.choice-icon{font-size:30px}@media(max-width:650px){.home-choices{grid-template-columns:1fr}}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#635bdb}
 h1{font-size:clamp(48px,8vw,84px);line-height:.95;letter-spacing:-5px;margin:16px 0}h1 span{color:#635bdb}
 .hero p{max-width:650px;margin:0 auto 28px;color:#666;font-size:18px}.tabs{display:flex;justify-content:center;gap:7px;margin:20px}.tab{padding:9px 14px;border-radius:10px;background:#eeeef3}.tab.active{background:#17171c;color:#fff}
 .box{max-width:850px;margin:auto;background:#fff;border:1px solid #dddde5;border-radius:18px;padding:14px;text-align:left;box-shadow:0 18px 50px #2221}
@@ -21,9 +21,7 @@ section{padding:70px 7%}.head{margin-bottom:25px}.head h2{font-size:32px;margin:
 footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;position:fixed;inset:0;background:#1118;place-items:center;padding:20px;z-index:10}.modal.show{display:grid}.modalbox{background:#fff;padding:25px;border-radius:20px;max-width:420px;width:100%}
 @media(max-width:800px){nav div{display:none}.cards{grid-template-columns:1fr}.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){nav{padding:0 18px}.hero,section{padding-left:20px;padding-right:20px}.plans{grid-template-columns:1fr}.bottom{flex-direction:column}.actions button{flex:1}}
 .dashboard{display:none;min-height:70vh;padding:70px 7%;background:#faf9ff}.dashboard.show{display:block}.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;max-width:1000px}.dash-card{background:#fff;border:1px solid #e4e4eb;border-radius:18px;padding:24px}.dash-card strong{display:block;font-size:28px;margin:8px 0}.userbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.auth-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0 12px}.auth-msg{font-size:13px;color:#777;min-height:20px}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}
-
-.student-setup{display:none;padding:55px 7%;background:#f8f7ff}.student-setup.show{display:block}.setup-box{max-width:900px;margin:auto;background:#fff;border:1px solid #e2e2ea;border-radius:22px;padding:28px;box-shadow:0 12px 35px #2221}.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff}.field textarea{min-height:90px}.field.full{grid-column:1/-1}.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.check{border:1px solid #ddd;border-radius:10px;padding:10px;display:flex;gap:8px;align-items:center}.setup-actions{display:flex;justify-content:space-between;gap:10px;margin-top:22px}.profile-summary{margin-top:18px;padding:15px;border-radius:14px;background:#f5f4fb}.dash-card button{margin-top:12px}@media(max-width:700px){.setup-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.check-grid{grid-template-columns:1fr 1fr}}
-</style>
+.home-choices{max-width:900px;margin:30px auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}.choice-card{background:#fff;border:1px solid #e2e2e8;border-radius:22px;padding:25px;box-shadow:0 16px 45px #2221}.choice-card h2{margin:10px 0 6px}.choice-card p{color:#666;min-height:45px}.choice-card button{width:100%;margin-top:10px;position:relative;z-index:3;pointer-events:auto}.choice-icon{font-size:30px}.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.student-grid>div{display:flex;flex-direction:column;gap:6px}.student-grid .full{grid-column:1/-1}.student-grid label{font-size:12px;font-weight:800}.student-types{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}.type-btn{padding:11px;border-radius:10px;background:#f1f1f5}.type-btn.active{background:#635bdb;color:white}.subject-list{display:grid!important;grid-template-columns:repeat(3,1fr);gap:7px}.subject-list label{font-weight:500!important;border:1px solid #ddd;padding:9px;border-radius:9px}.subject-list input{width:auto}@media(max-width:650px){.home-choices,.student-grid{grid-template-columns:1fr}.student-grid .full{grid-column:auto}.subject-list{grid-template-columns:1fr 1fr!important}}</style>
 </head>
 <body>
 <nav>
@@ -32,10 +30,19 @@ footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;
 <button class="btn light" onclick="currentUser?showDashboard():openAuth()" id="authBtn">Sign in</button>
 </nav>
 
-<div class="hero" id="summarize">
-<span class="eyebrow">READ LESS • KNOW MORE</span>
-<h1>Make long articles<br><span>SHORTER.</span></h1>
-<p>Turn long news articles and text into quick, readable summaries focused on the main things.</p>
+<div class="hero" id="home">
+<span class="eyebrow">UNDERSTAND • STUDY • ACHIEVE</span>
+<h1>What do you want to<br><span>do with SHORTER?</span></h1>
+<p>Choose your experience. Summarize information or build a personalized study journey.</p>
+<div class="home-choices">
+<div class="choice-card"><div class="choice-icon">🧠</div><h2>Summarize</h2><p>Turn long articles and text into short, readable key points.</p><button class="btn primary" onclick="document.getElementById('summarize').scrollIntoView({behavior:'smooth'})">Start Summarizing →</button></div>
+<div class="choice-card"><div class="choice-icon">🎓</div><h2>Student</h2><p>Create your goal, timetable, daily missions and progress plan.</p><button class="btn light" onclick="openStudent()">Set Up My Study Plan →</button></div>
+</div>
+</div>
+
+<div class="hero" id="summarize" style="padding-top:35px">
+<span class="eyebrow">SUMMARIZER</span>
+<h2 style="font-size:38px;margin:10px 0">Make long things <span>SHORTER.</span></h2>
 <div class="tabs"><button class="tab active" onclick="mode(this,'text')">Paste text</button><button class="tab" onclick="mode(this,'url')">Article link</button></div>
 <div class="box">
 <textarea id="input" placeholder="Paste a long article here..."></textarea>
@@ -58,24 +65,38 @@ footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;
 <div class="plan"><b>1 YEAR</b><strong>₹499</strong><small>₹41.58/month</small><button class="btn light" onclick="show('SHORTER Pro','You selected ₹359/year.')">Choose</button></div>
 </div></section>
 
-<section class="student-setup" id="studentSetup"><div class="setup-box"><span class="eyebrow">SHORTER STUDENT</span><h2>Build your study profile</h2><p class="muted">Tell SHORTER about your studies and goal. You can change these details later.</p><div class="setup-grid">
-<div class="field"><label>Studying in</label><select id="studyType" onchange="toggleStudyType()"><option value="school">School</option><option value="college">College</option></select></div>
-<div class="field" id="boardField"><label>Board</label><select id="board"><option>CBSE</option><option>MP Board</option><option>ICSE</option><option>UP Board</option><option>Rajasthan Board</option><option>Maharashtra Board</option><option>Bihar Board</option><option>Other</option></select></div>
-<div class="field" id="classField"><label>Class</label><select id="studentClass"><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select></div>
-<div class="field" id="degreeField" style="display:none"><label>Degree</label><input id="degree" placeholder="e.g. B.Tech"></div>
-<div class="field" id="branchField" style="display:none"><label>Branch / field</label><input id="branch" placeholder="e.g. Computer Science"></div>
-<div class="field" id="yearField" style="display:none"><label>Year / semester</label><input id="collegeYear" placeholder="e.g. 1st year"></div>
-<div class="field full"><label>🎯 Your goal</label><select id="goalType"><option>Top my current class</option><option>Achieve a percentage target</option><option>Improve a subject</option><option>Prepare for my current exam</option><option>Prepare for a future class/exam</option><option>Prepare for a competitive exam</option><option>Custom goal</option></select></div>
-<div class="field"><label>Target percentage (optional)</label><input id="targetPercent" type="number" min="1" max="100" placeholder="e.g. 99"></div>
-<div class="field"><label>Target exam / date (optional)</label><input id="targetExam" placeholder="e.g. Class 10 Board Exam"></div>
-<div class="field full"><label>📚 Select your subjects</label><div class="check-grid" id="subjectGrid"></div></div>
-<div class="field"><label>⏰ Daily study time</label><select id="studyTime"><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>3 hours</option><option>4+ hours</option></select></div>
-<div class="field"><label>💪 Strong subjects / topics</label><input id="strengths" placeholder="e.g. English, algebra"></div>
-<div class="field full"><label>🧠 Weak subjects / topics</label><input id="weaknesses" placeholder="e.g. Physics, fractions"></div>
-<div class="field full"><label>Anything else SHORTER should know? (optional)</label><textarea id="notes" placeholder="Tell us about your study preferences or situation..."></textarea></div>
-</div><div class="setup-actions"><button class="btn light" onclick="hideStudentSetup()">Cancel</button><button class="btn primary" onclick="saveStudentProfile()">Create My Plan 🚀</button></div><div class="auth-msg" id="setupMsg"></div></div></section><div class="dashboard" id="dashboard"><div class="userbar"><div><span class="eyebrow">YOUR ACCOUNT</span><h2 id="welcomeName">Welcome back!</h2><p class="muted" id="accountEmail"></p></div><button class="btn light" onclick="logout()">Log out</button></div><div class="dashboard-grid"><div class="dash-card"><span class="tag">SUMMARIES</span><strong id="summaryCount">0</strong><span class="muted">Summaries used this session</span></div><div class="dash-card"><span class="tag">PLAN</span><strong id="planName">Free</strong><span class="muted">Your current SHORTER plan</span></div><div class="dash-card"><span class="tag">STUDENT</span><strong id="studentGoal">Not set</strong><span class="muted" id="studentDetails">Create your study profile</span><button class="btn primary" onclick="openStudentSetup()">Set up / Edit profile</button></div><div class="dash-card"><span class="tag">TODAY</span><strong>My Mission</strong><span class="muted">Your adaptive daily tasks will appear here after your profile is created.</span></div><div class="dash-card"><span class="tag">MISSED WORK</span><strong id="missedCount">0</strong><span class="muted">Pending tasks you can complete or reschedule later.</span></div><div class="dash-card"><span class="tag">PRO</span><strong>₹49+</strong><span class="muted">Choose a Pro plan below</span><button class="btn primary" onclick="scrollToPricing()">View Pro plans</button></div></div></div>
+<div class="dashboard" id="dashboard"><div class="userbar"><div><span class="eyebrow">YOUR ACCOUNT</span><h2 id="welcomeName">Welcome back!</h2><p class="muted" id="accountEmail"></p></div><button class="btn light" onclick="logout()">Log out</button></div><div class="dashboard-grid"><div class="dash-card"><span class="tag">STUDENT</span><strong id="studentStatus">Not set</strong><span class="muted">Your personalized study profile</span><button class="btn primary" style="margin-top:15px" onclick="openStudent()">Student Setup</button></div><div class="dash-card"><span class="tag">SUMMARIES</span><strong id="summaryCount">0</strong><span class="muted">Summaries used this session</span></div><div class="dash-card"><span class="tag">PLAN</span><strong id="planName">Free</strong><span class="muted">Your current SHORTER plan</span></div><div class="dash-card"><span class="tag">PRO</span><strong>₹39+</strong><span class="muted">Choose a Pro plan below</span><button class="btn primary" style="margin-top:15px" onclick="scrollToPricing()">View Pro plans</button></div></div></div>
 <footer><b>SHORTER</b> — Read Less. Know More.<p>This is a front-end prototype. Real AI summarization, accounts, payments and article extraction require backend services.</p></footer>
 
+
+<div class="modal" id="studentModal"><div class="modalbox">
+<h2>🎓 Student Setup</h2><p class="muted">Tell SHORTER about yourself so it can build the right study plan.</p>
+<div class="student-grid">
+<div><label>Study type</label><div class="student-types"><button id="schoolBtn" class="type-btn active" onclick="setStudyType('school')">🏫 School</button><button id="collegeBtn" class="type-btn" onclick="setStudyType('college')">🎓 College</button></div></div>
+<div id="boardWrap"><label>Board</label><select id="studentBoard"><option value="">Select board</option><option>CBSE</option><option>MP Board</option><option>ICSE</option><option>UP Board</option><option>Rajasthan Board</option><option>Bihar Board</option><option>Maharashtra Board</option><option>Other</option></select></div>
+<div id="classWrap"><label>Class</label><select id="studentClass" onchange="updateClassFields()"><option value="">Select class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select></div>
+<div id="streamWrap" style="display:none"><label>Stream</label><select id="streamSelect" onchange="renderSubjects('school')">
+<option value="">Select stream</option>
+<option value="science">Science</option>
+<option value="commerce">Commerce</option>
+<option value="humanities">Humanities</option>
+</select></div>
+<div id="collegeWrap" style="display:none"><label>Degree</label><input id="degree" placeholder="e.g. B.Tech"></div>
+<div id="branchWrap" style="display:none"><label>Branch / field</label><input id="branch" placeholder="e.g. Computer Science"></div>
+<div id="yearWrap" style="display:none"><label>Year / semester</label><input id="year" placeholder="e.g. 1st Year"></div>
+<div class="full"><label>Goal</label><select id="studentGoal" onchange="goalChanged()"><option value="">Select your goal</option><option value="top">🏆 Top my current class</option><option value="percent">🎯 Achieve a target percentage</option><option value="subject">📚 Become strong in a subject</option><option value="exam">📝 Prepare for my current exam</option><option value="competitive">🚀 Prepare for a competitive exam</option><option value="next">📈 Prepare for the next class</option><option value="future">🎓 Prepare for a future exam</option><option value="custom">✏️ Write my own goal</option></select></div>
+<div id="competitiveWrap" class="full" style="display:none"><label>Which competitive exam?</label><select id="competitiveExam"><option value="">Select competitive exam</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>CUET</option><option>CLAT</option><option>NDA</option><option>UPSC</option><option>SSC</option><option>CAT</option><option>GATE</option><option>Other</option></select></div>
+<div id="percentWrap" style="display:none"><label>Target percentage</label><input id="targetPercent" type="number" min="1" max="100" placeholder="e.g. 99"></div>
+<div id="customWrap" class="full" style="display:none"><label>Your custom goal</label><input id="customGoal" placeholder="Write your goal"></div>
+<div class="full"><label>Subjects</label><div id="subjectList" class="subject-list"></div><small>Subjects change automatically based on your class and, for Class 11–12, your stream.</small></div>
+<div><label>Daily study time</label><select id="studyTime"><option value="">Select time</option><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>3 hours</option><option>4+ hours</option></select></div>
+<div><label>Current level</label><select id="level"><option value="">Select level</option><option>Needs a lot of help</option><option>Needs improvement</option><option>Okay</option><option>Good</option><option>Very strong</option></select></div>
+<div class="full"><label>Strong subjects</label><input id="strongSubjects" placeholder="e.g. English, Maths"></div>
+<div class="full"><label>Weak subjects / topics</label><input id="weakSubjects" placeholder="e.g. Physics numericals, Algebra"></div>
+</div>
+<p id="studentError" class="auth-msg"></p>
+<div class="actions"><button class="btn light" onclick="closeStudent()">Cancel</button><button class="btn primary" onclick="createStudentProfile()">Create My Profile →</button></div>
+</div></div>
 <div class="modal" id="authModal"><div class="modalbox"><h2 id="authTitle">Sign in to SHORTER</h2><p class="muted">Create an account or sign in to continue.</p><input class="auth-input" id="authName" placeholder="Your name" style="display:none"><input class="auth-input" id="authEmail" type="email" placeholder="Email"><input class="auth-input" id="authPassword" type="password" placeholder="Password"><div class="actions"><button class="btn light" onclick="closeAuth()">Cancel</button><button class="btn primary" onclick="submitAuth()">Continue</button></div><p class="auth-msg" id="authMsg"></p><button id="authSwitch" class="btn light" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">Create account</button></div></div>
 <div class="modal" id="modal"><div class="modalbox"><h2 id="mt"></h2><p id="mx"></p><button class="btn primary" onclick="closeModal()">Close</button></div></div>
 
@@ -88,23 +109,77 @@ function clearText(){document.getElementById('input').value='';document.getEleme
 function show(t,x){document.getElementById('mt').textContent=t;document.getElementById('mx').textContent=x;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
 function openAuth(m='login'){authMode=m;document.getElementById('authTitle').textContent=m==='login'?'Sign in to SHORTER':'Create your SHORTER account';document.getElementById('authName').style.display=m==='login'?'none':'block';document.getElementById('authSwitch').textContent=m==='login'?'Create account':'Already have an account? Sign in';document.getElementById('authMsg').textContent='';document.getElementById('authModal').classList.add('show')}
 function closeAuth(){document.getElementById('authModal').classList.remove('show')}function toggleAuthMode(){openAuth(authMode==='login'?'signup':'login')}
-function submitAuth(){let name=document.getElementById('authName').value.trim(),email=document.getElementById('authEmail').value.trim().toLowerCase(),password=document.getElementById('authPassword').value,msg=document.getElementById('authMsg');if(!email||!password||(authMode==='signup'&&!name)){msg.textContent='Please fill in all required fields.';return}if(password.length<6){msg.textContent='Password must be at least 6 characters.';return}let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(authMode==='signup'){if(users[email]){msg.textContent='Account already exists.';return}users[email]={name,email,password,plan:'Free'};localStorage.setItem('shorterUsers',JSON.stringify(users))}else if(!users[email]||users[email].password!==password){msg.textContent='Incorrect email or password.';return}currentUser=users[email];localStorage.setItem('shorterUser',JSON.stringify(currentUser));closeAuth();showDashboard();let pending=localStorage.getItem('shorterPendingPlan');if(pending)choosePro(pending)}
+function submitAuth(){let name=document.getElementById('authName').value.trim(),email=document.getElementById('authEmail').value.trim().toLowerCase(),password=document.getElementById('authPassword').value,msg=document.getElementById('authMsg');if(!email||!password||(authMode==='signup'&&!name)){msg.textContent='Please fill in all required fields.';return}if(password.length<6){msg.textContent='Password must be at least 6 characters.';return}let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(authMode==='signup'){if(users[email]){msg.textContent='Account already exists.';return}users[email]={name,email,password,plan:'Free'};localStorage.setItem('shorterUsers',JSON.stringify(users))}else if(!users[email]||users[email].password!==password){msg.textContent='Incorrect email or password.';return}currentUser=users[email];localStorage.setItem('shorterUser',JSON.stringify(currentUser));closeAuth();showDashboard();let pending=localStorage.getItem('shorterPendingPlan');if(pending)choosePro(pending);let after=localStorage.getItem('shorterAfterLogin');if(after==='student'){localStorage.removeItem('shorterAfterLogin');setTimeout(openStudent,150)}}
 function logout(){currentUser=null;localStorage.removeItem('shorterUser');document.getElementById('dashboard').classList.remove('show');document.getElementById('authBtn').textContent='Sign in';window.scrollTo({top:0,behavior:'smooth'})}
 function showDashboard(){if(!currentUser)return;document.getElementById('dashboard').classList.add('show');document.getElementById('authBtn').textContent='Dashboard';updateDashboard();document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})}
-function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free';let p=currentUser.studentProfile;if(p){let goal=p.goalType+(p.targetPercent?' • '+p.targetPercent+'%':'');document.getElementById('studentGoal').textContent=goal;document.getElementById('studentDetails').textContent=p.studyType==='school'?p.board+' • '+p.studentClass+' • '+p.subjects.length+' subjects':p.degree+' • '+p.branch+' • '+p.collegeYear}else{document.getElementById('studentGoal').textContent='Not set';document.getElementById('studentDetails').textContent='Create your study profile'}}
+function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free';let sp=document.getElementById('studentStatus');if(sp)sp.textContent=currentUser.studentProfile?'Ready':'Not set'}
 function isPro(){return currentUser&&currentUser.plan==='Pro'}function scrollToPricing(){document.getElementById('pricing').scrollIntoView({behavior:'smooth'})}
 function choosePlan(plan){if(!currentUser){localStorage.setItem('shorterPendingPlan',plan);openAuth('login');return}choosePro(plan)}
 function choosePro(plan){currentUser.plan='Pro';localStorage.setItem('shorterUser',JSON.stringify(currentUser));let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(users[currentUser.email]){users[currentUser.email].plan='Pro';localStorage.setItem('shorterUsers',JSON.stringify(users))}localStorage.removeItem('shorterPendingPlan');showDashboard();show('SHORTER Pro','Demo activation complete for '+plan+'. Connect a real payment provider before accepting real payments.')}
 function creatorTrial(){if(!currentUser)return openAuth('signup');choosePro('30-day Creator Pro trial')}
 function downloadWallpaper(name){show('Download selected',name+' — connect file storage to enable real downloads.')}
 function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
-const schoolSubjects=['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Third language'];
-function toggleStudyType(){let college=document.getElementById('studyType').value==='college';['boardField','classField'].forEach(id=>document.getElementById(id).style.display=college?'none':'block');['degreeField','branchField','yearField'].forEach(id=>document.getElementById(id).style.display=college?'block':'none');renderSubjects();}
-function renderSubjects(){let college=document.getElementById('studyType').value==='college';let list=college?['Mathematics','Physics','Chemistry','Biology','Computer Science','Economics','English','Other']:schoolSubjects;document.getElementById('subjectGrid').innerHTML=list.map((x,i)=>`<label class="check"><input type="checkbox" value="${x}" ${i<4?'checked':''}> ${x}</label>`).join('')}
-function openStudentSetup(){if(!currentUser)return openAuth('signup');let p=currentUser.studentProfile;if(p){document.getElementById('studyType').value=p.studyType||'school';toggleStudyType();['board','studentClass','goalType','targetPercent','targetExam','studyTime','strengths','weaknesses','notes','degree','branch','collegeYear'].forEach(id=>{if(p[id]!==undefined&&document.getElementById(id))document.getElementById(id).value=p[id]}) ;document.querySelectorAll('#subjectGrid input').forEach(x=>x.checked=(p.subjects||[]).includes(x.value));}else{document.getElementById('studyType').value='school';toggleStudyType()}document.getElementById('studentSetup').classList.add('show');document.getElementById('studentSetup').scrollIntoView({behavior:'smooth'});}
-function hideStudentSetup(){document.getElementById('studentSetup').classList.remove('show');if(currentUser)showDashboard()}
-function saveStudentProfile(){if(!currentUser)return openAuth('signup');let subjects=[...document.querySelectorAll('#subjectGrid input:checked')].map(x=>x.value);if(!subjects.length){document.getElementById('setupMsg').textContent='Please select at least one subject.';return}let p={studyType:document.getElementById('studyType').value,board:document.getElementById('board').value,studentClass:document.getElementById('studentClass').value,degree:document.getElementById('degree').value.trim(),branch:document.getElementById('branch').value.trim(),collegeYear:document.getElementById('collegeYear').value.trim(),goalType:document.getElementById('goalType').value,targetPercent:document.getElementById('targetPercent').value,targetExam:document.getElementById('targetExam').value.trim(),subjects,studyTime:document.getElementById('studyTime').value,strengths:document.getElementById('strengths').value.trim(),weaknesses:document.getElementById('weaknesses').value.trim(),notes:document.getElementById('notes').value.trim(),createdAt:Date.now()};currentUser.studentProfile=p;localStorage.setItem('shorterUser',JSON.stringify(currentUser));let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(users[currentUser.email]){users[currentUser.email].studentProfile=p;localStorage.setItem('shorterUsers',JSON.stringify(users))}document.getElementById('setupMsg').textContent='Profile saved! Your plan is ready to build.';setTimeout(()=>{document.getElementById('studentSetup').classList.remove('show');showDashboard()},350);updateDashboard()}
-window.addEventListener('load',()=>{renderSubjects();if(currentUser)showDashboard()});
+window.addEventListener('load',()=>{if(currentUser)showDashboard()});
+
+const subjectSets={
+ primary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
+ secondary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
+ science:['Physics','Chemistry','Mathematics','Biology','English','Computer Science','Physical Education','Other'],
+ commerce:['Accountancy','Business Studies','Economics','Mathematics / Applied Mathematics','English','Computer Science','Physical Education','Other'],
+ humanities:['History','Geography','Political Science','Economics','English','Sociology','Psychology','Physical Education','Other'],
+ college:['Physics','Chemistry','Mathematics','Biology','English','Accountancy','Business Studies','Economics','History','Geography','Political Science','Computer / IT','Other']
+};
+function getSchoolClass(){
+ const value=document.getElementById('studentClass').value;
+ const n=parseInt((value||'').replace(/\D/g,''),10);
+ return Number.isNaN(n)?0:n;
+}
+function renderSubjects(type='school'){
+ const box=document.getElementById('subjectList');
+ if(type==='college'){
+   box.innerHTML=subjectSets.college.map(subjectCheckbox).join('');
+   return;
+ }
+ const n=getSchoolClass();
+ let arr=n>=11 ? (document.getElementById('streamSelect')?.value==='commerce'?subjectSets.commerce:
+   document.getElementById('streamSelect')?.value==='humanities'?subjectSets.humanities:subjectSets.science)
+   : (n>=9?subjectSets.secondary:subjectSets.primary);
+ box.innerHTML=arr.map(subjectCheckbox).join('');
+}
+function subjectCheckbox(x){return '<label><input type="checkbox" value="'+x+'"> '+x+'</label>'}
+function updateClassFields(){
+ const n=getSchoolClass();
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=n>=11?'flex':'none';
+ renderSubjects('school');
+}
+function setStudyType(type){
+ document.getElementById('schoolBtn').classList.toggle('active',type==='school');
+ document.getElementById('collegeBtn').classList.toggle('active',type==='college');
+ document.getElementById('boardWrap').style.display=type==='school'?'block':'none';
+ document.getElementById('classWrap').style.display=type==='school'?'block':'none';
+ ['collegeWrap','branchWrap','yearWrap'].forEach(id=>document.getElementById(id).style.display=type==='college'?'flex':'none');
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=type==='school'&&getSchoolClass()>=11?'flex':'none';
+ renderSubjects(type);
+}
+function goalChanged(){let g=document.getElementById('studentGoal').value;document.getElementById('competitiveWrap').style.display=g==='competitive'?'block':'none';document.getElementById('percentWrap').style.display=g==='percent'?'block':'none';document.getElementById('customWrap').style.display=g==='custom'?'block':'none'}
+function createStudentProfile(){
+ if(!currentUser){openAuth('signup');return}
+ let school=document.getElementById('schoolBtn').classList.contains('active'),board=document.getElementById('studentBoard').value,cls=document.getElementById('studentClass').value,degree=document.getElementById('degree').value.trim(),branch=document.getElementById('branch').value.trim(),year=document.getElementById('year').value.trim(),g=document.getElementById('studentGoal').value,exam=document.getElementById('competitiveExam').value,subjects=[...document.querySelectorAll('#subjectList input:checked')].map(x=>x.value),time=document.getElementById('studyTime').value,level=document.getElementById('level').value,err=document.getElementById('studentError');
+ if(school&&(!board||!cls)){err.textContent='Please select your board and class.';return}
+ if(school&&getSchoolClass()>=11&&!document.getElementById('streamSelect').value){err.textContent='Please select your Class 11–12 stream.';return}
+ if(!school&&(!degree||!year)){err.textContent='Please enter your degree and year/semester.';return}
+ if(!g){err.textContent='Please select your goal.';return}
+ if(g==='competitive'&&!exam){err.textContent='Please select which competitive exam you are preparing for.';return}
+ if(g==='percent'&&!document.getElementById('targetPercent').value){err.textContent='Please enter your target percentage.';return}
+ if(g==='custom'&&!document.getElementById('customGoal').value.trim()){err.textContent='Please write your custom goal.';return}
+ if(!subjects.length||!time){err.textContent='Please select at least one subject and your daily study time.';return}
+ let goalText={top:'Top my current class',percent:'Achieve '+document.getElementById('targetPercent').value+'%',subject:'Become strong in a subject',exam:'Prepare for my current exam',competitive:'Prepare for '+exam,next:'Prepare for the next class',future:'Prepare for a future exam',custom:document.getElementById('customGoal').value.trim()}[g];
+ currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?document.getElementById('streamSelect').value:'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
+ let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
+ closeStudent();showDashboard();show('Profile created!','Your Student Profile is saved. Next we can build your personalized Goal Planner and Daily Mission.');
+}
 </script>
 </body>
 </html>
