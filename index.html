@@ -107,16 +107,8 @@ function mode(b,m){currentMode=m;document.querySelectorAll('.tab').forEach(x=>x.
 function summarize(){let text=document.getElementById('input').value.trim();if(!text)return show('Nothing to summarize','Paste an article or text first.');if(used>=3&&!isPro())return show('Daily limit reached','Free accounts can use 3 summaries per day in this prototype.');if(currentMode==='url')return show('Article link mode','URL extraction needs a backend. Paste the article text for this demo.');used++;sessionStorage.setItem('shorterUsed',used);let s=text.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+/g)||[text],v=document.getElementById('length').value,n=v==='short'?Math.max(1,Math.ceil(s.length*.2)):v==='medium'?Math.max(2,Math.ceil(s.length*.4)):Math.max(3,Math.ceil(s.length*.6));document.getElementById('summary').textContent=s.slice(0,n).map(x=>'• '+x.trim()).join('\n');document.getElementById('result').classList.add('show');updateDashboard()}
 function clearText(){document.getElementById('input').value='';document.getElementById('result').classList.remove('show')}function copySummary(){navigator.clipboard?.writeText(document.getElementById('summary').textContent);show('Copied!','Summary copied to clipboard.')}
 function show(t,x){document.getElementById('mt').textContent=t;document.getElementById('mx').textContent=x;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
-function openAuth(m='login'){
-  authMode=m;
-  document.getElementById('authTitle').textContent=m==='login'?'Sign in to SHORTER':'Create your SHORTER account';
-  document.getElementById('authName').style.display=m==='login'?'none':'block';
-  document.getElementById('authSwitch').textContent=m==='login'?'Create account':'Already have an account? Sign in';
-  document.getElementById('authMsg').textContent='';
-  document.getElementById('authModal').classList.add('show');
-}
-function closeAuth(){document.getElementById('authModal').classList.remove('show')}
-function toggleAuthMode(){openAuth(authMode==='login'?'signup':'login')}
+function openAuth(m='login'){authMode=m;document.getElementById('authTitle').textContent=m==='login'?'Sign in to SHORTER':'Create your SHORTER account';document.getElementById('authName').style.display=m==='login'?'none':'block';document.getElementById('authSwitch').textContent=m==='login'?'Create account':'Already have an account? Sign in';document.getElementById('authMsg').textContent='';document.getElementById('authModal').classList.add('show')}
+function closeAuth(){document.getElementById('authModal').classList.remove('show')}function toggleAuthMode(){openAuth(authMode==='login'?'signup':'login')}
 function submitAuth(){let name=document.getElementById('authName').value.trim(),email=document.getElementById('authEmail').value.trim().toLowerCase(),password=document.getElementById('authPassword').value,msg=document.getElementById('authMsg');if(!email||!password||(authMode==='signup'&&!name)){msg.textContent='Please fill in all required fields.';return}if(password.length<6){msg.textContent='Password must be at least 6 characters.';return}let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(authMode==='signup'){if(users[email]){msg.textContent='Account already exists.';return}users[email]={name,email,password,plan:'Free'};localStorage.setItem('shorterUsers',JSON.stringify(users))}else if(!users[email]||users[email].password!==password){msg.textContent='Incorrect email or password.';return}currentUser=users[email];localStorage.setItem('shorterUser',JSON.stringify(currentUser));closeAuth();showDashboard();let pending=localStorage.getItem('shorterPendingPlan');if(pending)choosePro(pending);let after=localStorage.getItem('shorterAfterLogin');if(after==='student'){localStorage.removeItem('shorterAfterLogin');setTimeout(openStudent,150)}}
 function logout(){currentUser=null;localStorage.removeItem('shorterUser');document.getElementById('dashboard').classList.remove('show');document.getElementById('authBtn').textContent='Sign in';window.scrollTo({top:0,behavior:'smooth'})}
 function showDashboard(){if(!currentUser)return;document.getElementById('dashboard').classList.add('show');document.getElementById('authBtn').textContent='Dashboard';updateDashboard();document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})}
@@ -129,6 +121,21 @@ function downloadWallpaper(name){show('Download selected',name+' — connect fil
 function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
 window.addEventListener('load',()=>{if(currentUser)showDashboard()});
 
+function openStudent(){
+  if(!currentUser){
+    localStorage.setItem('shorterAfterLogin','student');
+    openAuth('login');
+    return;
+  }
+  setStudyType('school');
+  renderSubjects('school');
+  document.getElementById('studentModal').classList.add('show');
+}
+
+function closeStudent(){
+  document.getElementById('studentModal').classList.remove('show');
+}
+
 const subjectSets={
  primary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
  secondary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
@@ -137,70 +144,40 @@ const subjectSets={
  humanities:['History','Geography','Political Science','Economics','English','Sociology','Psychology','Physical Education','Other'],
  college:['Physics','Chemistry','Mathematics','Biology','English','Accountancy','Business Studies','Economics','History','Geography','Political Science','Computer / IT','Other']
 };
-
-function openStudent(){
-  if(!currentUser){
-    localStorage.setItem('shorterAfterLogin','student');
-    openAuth('signup');
-    return;
-  }
-  setStudyType('school');
-  renderSubjects('school');
-  document.getElementById('studentModal').classList.add('show');
-}
-
-function closeStudent(){document.getElementById('studentModal').classList.remove('show')}
-
 function getSchoolClass(){
-  const value=document.getElementById('studentClass').value;
-  const n=parseInt((value||'').replace(/\D/g,''),10);
-  return Number.isNaN(n)?0:n;
+ const value=document.getElementById('studentClass').value;
+ const n=parseInt((value||'').replace(/\D/g,''),10);
+ return Number.isNaN(n)?0:n;
 }
-
-function subjectCheckbox(x){return '<label><input type="checkbox" value="'+x+'"> '+x+'</label>'}
-
 function renderSubjects(type='school'){
-  const box=document.getElementById('subjectList');
-  if(!box)return;
-  if(type==='college'){
-    box.innerHTML=subjectSets.college.map(subjectCheckbox).join('');
-    return;
-  }
-  const n=getSchoolClass();
-  let arr;
-  if(n>=11){
-    const stream=document.getElementById('streamSelect')?.value;
-    arr=stream==='commerce'?subjectSets.commerce:
-        stream==='humanities'?subjectSets.humanities:
-        subjectSets.science;
-  }else if(n>=9){
-    arr=subjectSets.secondary;
-  }else{
-    arr=subjectSets.primary;
-  }
-  box.innerHTML=arr.map(subjectCheckbox).join('');
+ const box=document.getElementById('subjectList');
+ if(type==='college'){
+   box.innerHTML=subjectSets.college.map(subjectCheckbox).join('');
+   return;
+ }
+ const n=getSchoolClass();
+ let arr=n>=11 ? (document.getElementById('streamSelect')?.value==='commerce'?subjectSets.commerce:
+   document.getElementById('streamSelect')?.value==='humanities'?subjectSets.humanities:subjectSets.science)
+   : (n>=9?subjectSets.secondary:subjectSets.primary);
+ box.innerHTML=arr.map(subjectCheckbox).join('');
 }
-
+function subjectCheckbox(x){return '<label><input type="checkbox" value="'+x+'"> '+x+'</label>'}
 function updateClassFields(){
-  const n=getSchoolClass();
-  const streamWrap=document.getElementById('streamWrap');
-  if(streamWrap)streamWrap.style.display=n>=11?'flex':'none';
-  renderSubjects('school');
+ const n=getSchoolClass();
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=n>=11?'flex':'none';
+ renderSubjects('school');
 }
-
 function setStudyType(type){
-  document.getElementById('schoolBtn').classList.toggle('active',type==='school');
-  document.getElementById('collegeBtn').classList.toggle('active',type==='college');
-  document.getElementById('boardWrap').style.display=type==='school'?'block':'none';
-  document.getElementById('classWrap').style.display=type==='school'?'block':'none';
-  ['collegeWrap','branchWrap','yearWrap'].forEach(id=>{
-    document.getElementById(id).style.display=type==='college'?'flex':'none';
-  });
-  const streamWrap=document.getElementById('streamWrap');
-  if(streamWrap)streamWrap.style.display=type==='school'&&getSchoolClass()>=11?'flex':'none';
-  renderSubjects(type);
+ document.getElementById('schoolBtn').classList.toggle('active',type==='school');
+ document.getElementById('collegeBtn').classList.toggle('active',type==='college');
+ document.getElementById('boardWrap').style.display=type==='school'?'block':'none';
+ document.getElementById('classWrap').style.display=type==='school'?'block':'none';
+ ['collegeWrap','branchWrap','yearWrap'].forEach(id=>document.getElementById(id).style.display=type==='college'?'flex':'none');
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=type==='school'&&getSchoolClass()>=11?'flex':'none';
+ renderSubjects(type);
 }
-
 function goalChanged(){let g=document.getElementById('studentGoal').value;document.getElementById('competitiveWrap').style.display=g==='competitive'?'block':'none';document.getElementById('percentWrap').style.display=g==='percent'?'block':'none';document.getElementById('customWrap').style.display=g==='custom'?'block':'none'}
 function createStudentProfile(){
  if(!currentUser){openAuth('signup');return}
