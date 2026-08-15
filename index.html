@@ -18,7 +18,7 @@ textarea{width:100%;min-height:210px;border:0;outline:0;resize:vertical;padding:
 select{padding:8px;border:1px solid #ddd;border-radius:9px;background:#fff}.result{display:none;border-top:1px solid #eee;margin-top:15px;padding-top:15px}.result.show{display:block}.summary{white-space:pre-wrap;line-height:1.7}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#f0effa;color:#635bdb;font-size:11px;font-weight:700}
 section{padding:70px 7%}.head{margin-bottom:25px}.head h2{font-size:32px;margin:6px 0}.muted{color:#777}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid #e8e8ee;border-radius:18px;padding:22px}.pricing{background:#faf9ff}.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.plan{background:white;border:1px solid #e2e2e8;border-radius:20px;padding:23px}.plan.featured{border:2px solid #635bdb}.plan strong{display:block;font-size:40px;margin:8px 0}.plan small{display:block;color:#777;margin-bottom:18px}
-footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;position:fixed;inset:0;background:#1118;place-items:center;padding:12px;z-index:10;overflow-y:auto}.modal.show{display:grid}.modalbox{background:#fff;padding:25px;border-radius:20px;max-width:420px;width:100%;max-height:calc(100vh - 24px);overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box}
+footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;position:fixed;inset:0;background:#1118;place-items:start center;padding:10px;z-index:100;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y}.modal.show{display:grid}.modalbox{background:#fff;padding:25px;border-radius:20px;max-width:420px;width:100%;max-height:calc(100dvh - 20px);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;box-sizing:border-box;margin:auto 0}
 @media(max-width:800px){nav div{display:none}.cards{grid-template-columns:1fr}.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.modal{padding:8px;align-items:start}.modalbox{max-height:calc(100vh - 16px);padding:20px}nav{padding:0 18px}.hero,section{padding-left:20px;padding-right:20px}.plans{grid-template-columns:1fr}.bottom{flex-direction:column}.actions button{flex:1}}
 .dashboard{display:none;min-height:70vh;padding:70px 7%;background:#faf9ff}.dashboard.show{display:block}.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;max-width:1000px}.dash-card{background:#fff;border:1px solid #e4e4eb;border-radius:18px;padding:24px}.dash-card strong{display:block;font-size:28px;margin:8px 0}.userbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.auth-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0 12px}.auth-msg{font-size:13px;color:#777;min-height:20px}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}
 .home-choices{max-width:900px;margin:30px auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}.choice-card{background:#fff;border:1px solid #e2e2e8;border-radius:22px;padding:25px;box-shadow:0 16px 45px #2221}.choice-card h2{margin:10px 0 6px}.choice-card p{color:#666;min-height:45px}.choice-card button{width:100%;margin-top:10px;position:relative;z-index:3;pointer-events:auto}.choice-icon{font-size:30px}.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.student-grid>div{display:flex;flex-direction:column;gap:6px}.student-grid .full{grid-column:1/-1}.student-grid label{font-size:12px;font-weight:800}.student-types{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}.type-btn{padding:11px;border-radius:10px;background:#f1f1f5}.type-btn.active{background:#635bdb;color:white}.subject-list{display:grid!important;grid-template-columns:repeat(3,1fr);gap:7px}.subject-list label{font-weight:500!important;border:1px solid #ddd;padding:9px;border-radius:9px}.subject-list input{width:auto}@media(max-width:650px){.home-choices,.student-grid{grid-template-columns:1fr}.student-grid .full{grid-column:auto}.subject-list{grid-template-columns:1fr 1fr!important}}</style>
@@ -75,17 +75,21 @@ footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;
 <div><label>Study type</label><div class="student-types"><button id="schoolBtn" class="type-btn active" onclick="setStudyType('school')">🏫 School</button><button id="collegeBtn" class="type-btn" onclick="setStudyType('college')">🎓 College</button></div></div>
 <div id="boardWrap"><label>Board</label><select id="studentBoard"><option value="">Select board</option><option>CBSE</option><option>MP Board</option><option>ICSE</option><option>UP Board</option><option>Rajasthan Board</option><option>Bihar Board</option><option>Maharashtra Board</option><option>Other</option></select></div>
 <div id="classWrap"><label>Class</label><select id="studentClass" onchange="updateClassFields()"><option value="">Select class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select></div>
-<div id="streamWrap" style="display:none"><label>Stream</label><select id="streamSelect" onchange="renderSubjects('school')">
+<div id="streamWrap" style="display:none"><label>Stream</label><select id="streamSelect" onchange="streamChanged()">
 <option value="">Select stream</option>
-<option value="science">Science</option>
+<option value="maths">Maths</option>
+<option value="bio">Biology</option>
 <option value="commerce">Commerce</option>
-<option value="humanities">Humanities</option>
+<option value="other">Other</option>
 </select></div>
+<div id="otherStreamWrap" class="full" style="display:none"><label>Your stream</label><input id="otherStream" placeholder="Write your stream in your own words"></div>
 <div id="collegeWrap" style="display:none"><label>Degree</label><input id="degree" placeholder="e.g. B.Tech"></div>
 <div id="branchWrap" style="display:none"><label>Branch / field</label><input id="branch" placeholder="e.g. Computer Science"></div>
 <div id="yearWrap" style="display:none"><label>Year / semester</label><input id="year" placeholder="e.g. 1st Year"></div>
 <div class="full"><label>Goal</label><select id="studentGoal" onchange="goalChanged()"><option value="">Select your goal</option><option value="top">🏆 Top my current class</option><option value="percent">🎯 Achieve a target percentage</option><option value="subject">📚 Become strong in a subject</option><option value="exam">📝 Prepare for my current exam</option><option value="competitive">🚀 Prepare for a competitive exam</option><option value="next">📈 Prepare for the next class</option><option value="future">🎓 Prepare for a future exam</option><option value="custom">✏️ Write my own goal</option></select></div>
-<div id="competitiveWrap" class="full" style="display:none"><label>Which competitive exam?</label><select id="competitiveExam"><option value="">Select competitive exam</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>CUET</option><option>CLAT</option><option>NDA</option><option>UPSC</option><option>SSC</option><option>CAT</option><option>GATE</option><option>Other</option></select></div>
+<div id="competitiveWrap" class="full" style="display:none"><label>Which competitive exam?</label><select id="competitiveExam" onchange="competitiveExamChanged()">
+<option value="">Select competitive exam</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>CUET</option><option>CLAT</option><option>NDA</option><option>UPSC</option><option>SSC</option><option>CAT</option><option>GATE</option><option>Other</option></select></div>
+<div id="otherExamWrap" class="full" style="display:none"><label>Your competitive exam</label><input id="otherExam" placeholder="Write the exam name in your own words"></div>
 <div id="percentWrap" style="display:none"><label>Target percentage</label><input id="targetPercent" type="number" min="1" max="100" placeholder="e.g. 99"></div>
 <div id="customWrap" class="full" style="display:none"><label>Your custom goal</label><input id="customGoal" placeholder="Write your goal"></div>
 <div class="full"><label>Subjects</label><div id="subjectList" class="subject-list"></div><small>Subjects change automatically based on your class and, for Class 11–12, your stream.</small></div>
@@ -178,20 +182,33 @@ function setStudyType(type){
  if(streamWrap) streamWrap.style.display=type==='school'&&getSchoolClass()>=11?'flex':'none';
  renderSubjects(type);
 }
+function streamChanged(){
+  const value=document.getElementById('streamSelect').value;
+  document.getElementById('otherStreamWrap').style.display=value==='other'?'flex':'none';
+  renderSubjects('school');
+}
+function competitiveExamChanged(){
+  const value=document.getElementById('competitiveExam').value;
+  document.getElementById('otherExamWrap').style.display=value==='Other'?'flex':'none';
+}
 function goalChanged(){let g=document.getElementById('studentGoal').value;document.getElementById('competitiveWrap').style.display=g==='competitive'?'block':'none';document.getElementById('percentWrap').style.display=g==='percent'?'block':'none';document.getElementById('customWrap').style.display=g==='custom'?'block':'none'}
 function createStudentProfile(){
  if(!currentUser){openAuth('signup');return}
  let school=document.getElementById('schoolBtn').classList.contains('active'),board=document.getElementById('studentBoard').value,cls=document.getElementById('studentClass').value,degree=document.getElementById('degree').value.trim(),branch=document.getElementById('branch').value.trim(),year=document.getElementById('year').value.trim(),g=document.getElementById('studentGoal').value,exam=document.getElementById('competitiveExam').value,subjects=[...document.querySelectorAll('#subjectList input:checked')].map(x=>x.value),time=document.getElementById('studyTime').value,level=document.getElementById('level').value,err=document.getElementById('studentError');
  if(school&&(!board||!cls)){err.textContent='Please select your board and class.';return}
  if(school&&getSchoolClass()>=11&&!document.getElementById('streamSelect').value){err.textContent='Please select your Class 11–12 stream.';return}
+ if(school&&getSchoolClass()>=11&&document.getElementById('streamSelect').value==='other'&&!document.getElementById('otherStream').value.trim()){err.textContent='Please write your stream.';return}
  if(!school&&(!degree||!year)){err.textContent='Please enter your degree and year/semester.';return}
  if(!g){err.textContent='Please select your goal.';return}
  if(g==='competitive'&&!exam){err.textContent='Please select which competitive exam you are preparing for.';return}
+ if(g==='competitive'&&exam==='Other'&&!document.getElementById('otherExam').value.trim()){err.textContent='Please write the competitive exam name.';return}
  if(g==='percent'&&!document.getElementById('targetPercent').value){err.textContent='Please enter your target percentage.';return}
  if(g==='custom'&&!document.getElementById('customGoal').value.trim()){err.textContent='Please write your custom goal.';return}
  if(!subjects.length||!time){err.textContent='Please select at least one subject and your daily study time.';return}
+ if(g==='competitive'&&exam==='Other') exam=document.getElementById('otherExam').value.trim();
+ let customStream=school&&document.getElementById('streamSelect').value==='other'?document.getElementById('otherStream').value.trim():'';
  let goalText={top:'Top my current class',percent:'Achieve '+document.getElementById('targetPercent').value+'%',subject:'Become strong in a subject',exam:'Prepare for my current exam',competitive:'Prepare for '+exam,next:'Prepare for the next class',future:'Prepare for a future exam',custom:document.getElementById('customGoal').value.trim()}[g];
- currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?document.getElementById('streamSelect').value:'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
+ currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?(document.getElementById('streamSelect').value==='other'?customStream:document.getElementById('streamSelect').value):'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
  let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
  closeStudent();showDashboard();show('Profile created!','Your Student Profile is saved. Next we can build your personalized Goal Planner and Daily Mission.');
 }
