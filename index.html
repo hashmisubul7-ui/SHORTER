@@ -77,11 +77,41 @@ body.nx-logged-in #wallpapers,
 body.nx-logged-in #about,
 body.nx-logged-in #contact{display:none!important}
 body.nx-logged-in .nx-app-shell{min-height:calc(100vh - 80px)}
+
+/* REAL LOGGED-IN APP MODE */
+body.nx-logged-in > nav,
+body.nx-logged-in > .hero,
+body.nx-logged-in > section,
+body.nx-logged-in > footer,
+body.nx-logged-in > .dashboard {display:none!important}
+body.nx-logged-in{background:#f6f7fb!important}
+body.nx-logged-in #nxApp{display:block!important}
+.nx-app-shell{padding-bottom:95px}
+.nx-app-header{position:sticky;top:0;z-index:40;background:rgba(246,247,251,.96);backdrop-filter:blur(12px);padding:10px 0 12px}
+.nx-brandline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nx-brandline .nx-brand{font-size:23px;font-weight:900;letter-spacing:-.8px}
+.nx-brandline .nx-brand span{color:#5b55e8}
+.nx-page{min-height:55vh}
+.nx-page.active{display:block!important}
+.nx-section-title{font-size:25px;margin:4px 0 5px;letter-spacing:-.5px}
+.nx-section-sub{color:#777b8c;margin:0 0 16px}
+.nx-timetable{display:grid;gap:10px}
+.nx-time-row{display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:stretch}
+.nx-time{display:flex;align-items:center;justify-content:center;background:#eeeefe;color:#5149c8;border-radius:13px;font-weight:900;font-size:13px}
+.nx-time-card{background:#fff;border:1px solid #e8e9f1;border-radius:15px;padding:13px}
+.nx-time-card b{display:block}.nx-time-card small{display:block;color:#777;margin-top:4px}
+.nx-zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.nx-timer{font-size:46px;font-weight:900;text-align:center;letter-spacing:-2px;margin:12px 0}
+.nx-zone-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.nx-note{width:100%;min-height:160px;border:1px solid #e8e9f1;border-radius:14px;padding:13px;resize:vertical;outline:none;background:#fff}
+.nx-pill{display:inline-block;padding:6px 9px;border-radius:999px;background:#eeeefe;color:#5149c8;font-size:11px;font-weight:800}
+.nx-danger{color:#b42318}
+@media(max-width:650px){.nx-zone-grid{grid-template-columns:1fr}.nx-time-row{grid-template-columns:70px 1fr}.nx-time{font-size:11px}}
 </style>
 </head>
 <body>
 <nav>
-<a class="logo" href="#">SH<span>O</span>RTER</a>
+<a class="logo" href="#">NEX<span>O</span>RA</a>
 <div><a href="#summarize">Summarize</a><a href="#features">Features</a><a href="#pricing">Pro</a></div>
 <button class="btn light" onclick="currentUser?showDashboard():openAuth()" id="authBtn">Sign in</button>
 </nav>
@@ -138,92 +168,118 @@ body.nx-logged-in .nx-app-shell{min-height:calc(100vh - 80px)}
 </div>
 </div>
 
+
 <div id="nxApp" style="display:none">
   <div class="nx-app-shell">
-    <div class="nx-welcome">
-      <div>
-        <h1 id="nxHello">Welcome back 👋</h1>
-        <div class="nx-sub" id="nxGoalSmall">Your next step starts today.</div>
-      </div>
-      <div class="nx-top-actions">
-        <button class="nx-icon-btn" onclick="nxOpenProfile()">👤 Profile</button>
-        <button class="nx-icon-btn" onclick="nxOpenSettings()">⚙️</button>
+    <div class="nx-app-header">
+      <div class="nx-brandline">
+        <div class="nx-brand">NEX<span>O</span>RA</div>
+        <div class="nx-top-actions">
+          <button class="nx-icon-btn" onclick="nxOpenProfile()">👤 Profile</button>
+          <button class="nx-icon-btn" onclick="nxOpenSettings()">⚙️</button>
+        </div>
       </div>
     </div>
 
-    <section id="nxHome" class="nx-page active">
-      <div class="nx-grid">
-        <div class="nx-card nx-goal">
-          <div style="font-size:12px;font-weight:800;opacity:.8">ACTIVE GOAL</div>
-          <h2 id="nxGoal" style="margin:7px 0"></h2>
-          <div class="nx-sub" id="nxGoalMeta"></div>
+    <main>
+      <section id="nxHome" class="nx-page active">
+        <div class="nx-welcome">
+          <div><h1 id="nxHello">Welcome back 👋</h1><div class="nx-sub" id="nxGoalSmall">Your next step starts today.</div></div>
+        </div>
+        <div class="nx-grid">
+          <div class="nx-card nx-goal">
+            <div style="font-size:12px;font-weight:800;opacity:.8">ACTIVE GOAL</div>
+            <h2 id="nxGoal" style="margin:7px 0"></h2>
+            <div class="nx-sub" id="nxGoalMeta"></div>
+            <div class="nx-actions">
+              <button class="nx-primary" onclick="nxGo('today')">✅ Today's Tasks</button>
+              <button class="nx-secondary" onclick="nxGo('timetable')">📅 Timetable</button>
+            </div>
+          </div>
+          <div class="nx-card">
+            <h3>Progress</h3>
+            <div class="nx-stat-grid">
+              <div class="nx-stat"><b id="nxPct">0%</b><span>21-day progress</span></div>
+              <div class="nx-stat"><b id="nxTaskCount">0</b><span>tasks done</span></div>
+              <div class="nx-stat"><b id="nxFocus">—</b><span>weak focus</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="nx-card" style="margin-top:14px">
+          <h3>Continue studying</h3>
           <div class="nx-actions">
-            <button class="nx-primary" onclick="nxGo('today')">View Today's Tasks</button>
-            <button class="nx-secondary" onclick="nxGo('roadmap')">View Roadmap</button>
+            <button class="nx-primary" onclick="nxGo('studyzone')">🧠 Self Study Zone</button>
+            <button class="nx-secondary" onclick="nxGo('roadmap')">🗺️ Goal Roadmap</button>
+            <button class="nx-secondary" onclick="nxOpenProfile()">👤 My Profile</button>
           </div>
         </div>
+      </section>
+
+      <section id="nxToday" class="nx-page">
+        <h2 class="nx-section-title">Today</h2><p class="nx-section-sub">Your tasks are generated from your subjects, study time and weak areas.</p>
+        <div class="nx-card"><div id="nxTodayTasks"></div></div>
+      </section>
+
+      <section id="nxTimetable" class="nx-page">
+        <h2 class="nx-section-title">My Timetable</h2><p class="nx-section-sub" id="nxTimetableSub"></p>
+        <div class="nx-card"><div id="nxTimetableContent" class="nx-timetable"></div></div>
+      </section>
+
+      <section id="nxRoadmap" class="nx-page">
+        <h2 class="nx-section-title">Goal Roadmap</h2><p class="nx-section-sub">A 21-day cycle that moves you toward your active goal.</p>
+        <div class="nx-card"><div id="nxRoadmapContent"></div></div>
+        <div class="nx-card" style="margin-top:12px">
+          <h3>Goal completion</h3><p class="nx-sub">When this specific goal is achieved, finish this cycle and set a new goal. The ₹1499 plan applies to one goal cycle only.</p>
+          <button class="nx-primary" onclick="nxCompleteGoal()">🎯 Mark This Goal Completed</button>
+        </div>
+      </section>
+
+      <section id="nxStudyzone" class="nx-page">
+        <h2 class="nx-section-title">Self Study Zone</h2><p class="nx-section-sub">A distraction-free place to focus, track a session and keep notes.</p>
+        <div class="nx-zone-grid">
+          <div class="nx-card">
+            <span class="nx-pill">FOCUS TIMER</span>
+            <div id="nxTimer" class="nx-timer">25:00</div>
+            <div class="nx-zone-actions">
+              <button class="nx-primary" onclick="nxTimerStart()">▶ Start</button>
+              <button class="nx-secondary" onclick="nxTimerPause()">⏸ Pause</button>
+              <button class="nx-secondary" onclick="nxTimerReset()">↻ Reset</button>
+            </div>
+            <p class="nx-sub" style="text-align:center;margin-top:12px">Choose a subject from your timetable, then start a focused session.</p>
+          </div>
+          <div class="nx-card">
+            <span class="nx-pill">STUDY NOTES</span>
+            <textarea id="nxNotes" class="nx-note" placeholder="Write what you learned, mistakes to revise, or questions for later..."></textarea>
+            <button class="nx-primary" style="margin-top:9px" onclick="nxSaveNotes()">Save Notes</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="nxProfile" class="nx-page">
+        <h2 class="nx-section-title">My Profile</h2><p class="nx-section-sub">Your study setup and current goal.</p>
         <div class="nx-card">
-          <h3>Progress</h3>
-          <div class="nx-stat-grid">
-            <div class="nx-stat"><b id="nxPct">0%</b><span>21-day progress</span></div>
-            <div class="nx-stat"><b id="nxTaskCount">0</b><span>tasks done</span></div>
-            <div class="nx-stat"><b id="nxFocus">—</b><span>focus</span></div>
-          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Student details</h3><button class="nx-secondary" onclick="nxEditProfile()">Edit Profile & Goal</button></div>
+          <div id="nxProfileDetails"></div>
         </div>
-      </div>
-      <div class="nx-card" style="margin-top:14px">
-        <h3>Quick access</h3>
-        <div class="nx-actions">
-          <button class="nx-primary" onclick="nxGo('today')">✅ Today</button>
-          <button class="nx-secondary" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
-          <button class="nx-secondary" onclick="nxOpenProfile()">👤 My Profile</button>
-          <button class="nx-secondary" onclick="nxOpenSettings()">⚙️ Settings</button>
+        <div class="nx-card" style="margin-top:12px"><h3>Goal History</h3><div id="nxGoalHistory" class="nx-goal-history"></div></div>
+      </section>
+
+      <section id="nxSettings" class="nx-page">
+        <h2 class="nx-section-title">Settings</h2><p class="nx-section-sub">Account and plan controls.</p>
+        <div class="nx-card">
+          <div class="nx-profile-row"><span>Account</span><b id="nxAccount"></b></div>
+          <div class="nx-profile-row"><span>Plan</span><b id="nxPlan">Free</b></div>
+          <div class="nx-actions"><button class="nx-secondary" onclick="nxLogout()">Log out</button></div>
         </div>
-      </div>
-    </section>
-
-    <section id="nxToday" class="nx-page">
-      <div class="nx-card">
-        <h3>Today's Tasks</h3>
-        <div id="nxTodayTasks"></div>
-      </div>
-    </section>
-
-    <section id="nxRoadmap" class="nx-page">
-      <div class="nx-card">
-        <h3>Goal Roadmap</h3>
-        <div id="nxRoadmapContent"></div>
-        <div class="nx-actions">
-          <button class="nx-primary" onclick="nxCompleteGoal()">🎯 Mark Goal Completed</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="nxProfile" class="nx-page">
-      <div class="nx-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-          <h3>My Profile</h3><button class="nx-secondary" onclick="nxEditProfile()">Edit Profile & Goal</button>
-        </div>
-        <div id="nxProfileDetails"></div>
-        <h3 style="margin-top:20px">Goal History</h3>
-        <div id="nxGoalHistory" class="nx-goal-history"></div>
-      </div>
-    </section>
-
-    <section id="nxSettings" class="nx-page">
-      <div class="nx-card">
-        <h3>Settings</h3>
-        <div class="nx-profile-row"><span>Account</span><b id="nxAccount"></b></div>
-        <div class="nx-profile-row"><span>Plan</span><b id="nxPlan">Free</b></div>
-        <div class="nx-actions"><button class="nx-secondary" onclick="nxLogout()">Log out</button></div>
-      </div>
-    </section>
+      </section>
+    </main>
   </div>
-
   <nav class="nx-nav">
     <button id="nxNavHome" class="active" onclick="nxGo('home')">🏠 Home</button>
     <button id="nxNavToday" onclick="nxGo('today')">✅ Today</button>
+    <button id="nxNavTimetable" onclick="nxGo('timetable')">📅 Timetable</button>
     <button id="nxNavRoadmap" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
+    <button id="nxNavStudyzone" onclick="nxGo('studyzone')">🧠 Study</button>
     <button id="nxNavProfile" onclick="nxOpenProfile()">👤 Profile</button>
   </nav>
 </div>
@@ -288,17 +344,15 @@ function logout(){
  currentUser=null;
  localStorage.removeItem('shorterUser');
  document.body.classList.remove('nx-logged-in');
- document.getElementById('nxApp').style.display='none';
- document.getElementById('dashboard').classList.remove('show');
+ const app=document.getElementById('nxApp');if(app)app.style.display='none';
  document.getElementById('authBtn').textContent='Sign in';
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function showDashboard(){
  if(!currentUser)return;
  document.getElementById('authBtn').textContent='Dashboard';
- try{nxShowApp();}catch(e){}
+ try{nxShowApp();nxGo('home');}catch(e){}
  updateDashboard();
- window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free';let sp=document.getElementById('studentStatus');if(sp)sp.textContent=currentUser.studentProfile?'Ready':'Not set';let box=document.getElementById('studentPlanPreview');if(box&&currentUser.studentProfile){let p=currentUser.studentProfile;box.style.display='block';document.getElementById('studentPlanTitle').textContent=p.goalText||'Your Study Goal';let detail=[p.type==='school'?p.board+' • '+p.cls:p.degree+' • '+p.year,p.stream?'Stream: '+p.stream:'',p.competitiveExam?'Exam: '+p.competitiveExam:'',p.time?'Study time: '+p.time:'',p.level?'Level: '+p.level:''].filter(Boolean).join(' | ');document.getElementById('studentPlanDetails').textContent=detail||'Your profile is saved.';let pl=document.getElementById('studentPlanner');if(pl){pl.style.display='block';makePlanner(p)}}else if(box){box.style.display='none'}}
 function closeProfileSuccess(){
@@ -317,7 +371,7 @@ function choosePro(plan){currentUser.plan='Pro';localStorage.setItem('shorterUse
 function creatorTrial(){if(!currentUser)return openAuth('signup');choosePro('30-day Creator Pro trial')}
 function downloadWallpaper(name){show('Download selected',name+' — connect file storage to enable real downloads.')}
 function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
-window.addEventListener('load',()=>{if(currentUser){try{nxShowApp();}catch(e){}showDashboard();}});
+window.addEventListener('load',()=>{if(currentUser){try{nxShowApp();nxGo('home');}catch(e){}}});
 
 function openStudent(){
   if(!currentUser){
@@ -412,7 +466,6 @@ function createStudentProfile(){
  currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?(document.getElementById('streamSelect').value==='other'?customStream:document.getElementById('streamSelect').value):'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
  let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
  closeStudent();
-showDashboard();
 try{nxShowApp();nxGo('home');}catch(e){}
 show('Your Study Plan is ready!','NEXORA created your timetable, daily tasks, 21-day test cycle and goal roadmap. Open Today or Roadmap from the app navigation.');
 }
@@ -425,27 +478,18 @@ function togglePlannerTask(id,checked){let d=JSON.parse(localStorage.getItem(pla
 function updatePlannerProgress(){let d=JSON.parse(localStorage.getItem(plannerKey())||'{}'),n=Object.values(d).filter(Boolean).length,p=Math.min(100,Math.round(n/63*100));let f=document.getElementById('plannerProgressFill'),t=document.getElementById('plannerProgressText');if(f)f.style.width=p+'%';if(t)t.textContent=p+'%';document.querySelectorAll('#todayTasks .task-row').forEach(r=>{let c=r.querySelector('input');if(c&&d[r.dataset.task]){c.checked=true;r.classList.add('done')}})}
 function makePlanner(p){let a=(p.subjects||[]).filter(Boolean),w=a.filter(x=>plannerWeak(x,p)),m=plannerMinutes(p.time);document.getElementById('plannerGoalLine').textContent=(p.goalText||'Your goal')+' • '+m+' min/day';document.getElementById('plannerFocusNote').innerHTML='<b>Adaptive focus:</b> '+(w.length?'Extra practice is reserved for '+w.join(', ')+'.':'Balanced time across your selected subjects.')+' Tests are planned for days 7, 14 and 21.';let today=plannerTasks(p,1);document.getElementById('todayTasks').innerHTML=today.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="togglePlannerTask(\''+x.id+'\',this.checked)"><span><span class="task-title">'+x.title+'</span><div class="task-meta">'+x.meta+'</div></span></label>').join('');document.getElementById('weekTasks').innerHTML=Array.from({length:7},(_,i)=>'<div class="task-row"><span>•</span><span class="task-title">Day '+(i+1)+': '+(i===6?'test + mistake review':(w.length?'extra '+w[0]+' practice + daily subject work':'complete your daily subject work'))+'</span></div>').join('');document.getElementById('testPlan').innerHTML=['Day 7 — progress test','Day 14 — progress test','Day 21 — final test + review'].map(x=>'<div class="task-row"><span>📝</span><span class="task-title">'+x+'</span></div>').join('');let steps=[['1','Foundation','Days 1–7: build the routine, study core topics and take the first test.'],['2','Practice','Days 8–14: increase question practice and focus on weak areas.'],['3','Improve','Days 15–21: revise mistakes and strengthen weak topics.'],['4','Repeat','After Day 21: use test mistakes and unfinished work to build the next cycle.']];document.getElementById('roadmapList').innerHTML=steps.map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="muted">'+x[2]+'</div></div></div>').join('');updatePlannerProgress()}
 
+
 function nxProfile(){return (typeof currentUser!=='undefined'&&currentUser)?currentUser.studentProfile:null}
 function nxEsc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function nxPlannerData(){return JSON.parse(localStorage.getItem((currentUser&&currentUser.email?'shorterPlanner_':'shorterPlanner_')+(currentUser?.email||'x'))||'{}')}
+function nxPlannerData(){return JSON.parse(localStorage.getItem('shorterPlanner_'+(currentUser?.email||'x'))||'{}')}
 function nxShowApp(){
  document.body.classList.add('nx-logged-in');
- const app=document.getElementById('nxApp'); if(!app)return;
+ const app=document.getElementById('nxApp');if(!app)return;
  app.style.display='block';
- if(nxProfile()){nxRender();}
- else{
-   document.getElementById('nxHello').textContent='Welcome back 👋';
-   document.getElementById('nxGoal').textContent='Set your first study goal';
-   document.getElementById('nxGoalSmall').textContent='Create your student profile to build your timetable.';
-   document.getElementById('nxGoalMeta').textContent='Your personalized plan will appear here.';
-   document.getElementById('nxTodayTasks').innerHTML='<div class="nx-sub">Complete Student Setup to generate today’s tasks.</div>';
-   document.getElementById('nxRoadmapContent').innerHTML='<div class="nx-sub">Your roadmap will be created after you choose your goal.</div>';
-   document.getElementById('nxProfileDetails').innerHTML='<div class="nx-sub">No student profile yet.</div>';
-   document.getElementById('nxGoalHistory').innerHTML='<div class="nx-sub">No completed goals yet.</div>';
- }
+ if(nxProfile())nxRender();
 }
 function nxGo(page){
- ['home','today','roadmap','profile','settings'].forEach(x=>document.getElementById('nx'+x[0].toUpperCase()+x.slice(1))?.classList.remove('active'));
+ ['home','today','timetable','roadmap','studyzone','profile','settings'].forEach(x=>document.getElementById('nx'+x[0].toUpperCase()+x.slice(1))?.classList.remove('active'));
  const el=document.getElementById('nx'+page[0].toUpperCase()+page.slice(1));if(el)el.classList.add('active');
  document.querySelectorAll('.nx-nav button').forEach(b=>b.classList.remove('active'));
  const nb=document.getElementById('nxNav'+page[0].toUpperCase()+page.slice(1));if(nb)nb.classList.add('active');
@@ -455,48 +499,77 @@ function nxOpenProfile(){nxGo('profile')}
 function nxOpenSettings(){nxGo('settings')}
 function nxRender(){
  const p=nxProfile();if(!p)return;
- const name=(p.name||currentUser?.name||'Student').split(' ')[0];
+ const name=(currentUser?.name||'Student').split(' ')[0];
  document.getElementById('nxHello').textContent='Welcome back, '+name+' 👋';
+ const cls=p.cls||p.class||p.degree||'Student';
  document.getElementById('nxGoal').textContent=p.goalText||'Your active goal';
- document.getElementById('nxGoalSmall').textContent=(p.class||p.degree||'Student')+' • '+(p.board||'') ;
- document.getElementById('nxGoalMeta').textContent=[p.class||p.degree,p.board,p.competitiveExam].filter(Boolean).join(' • ');
+ document.getElementById('nxGoalSmall').textContent=cls+(p.board?' • '+p.board:'');
+ document.getElementById('nxGoalMeta').textContent=[cls,p.stream,p.competitiveExam].filter(Boolean).join(' • ');
  document.getElementById('nxAccount').textContent=currentUser?.email||'Signed in';
- const weak=(p.weak||'').trim();document.getElementById('nxFocus').textContent=weak?weak.split(',')[0]:'Balanced';
- const tasks=nxTodayTasks(p);document.getElementById('nxTodayTasks').innerHTML=tasks;
+ document.getElementById('nxPlan').textContent=currentUser?.plan||'Free';
+ const weak=(p.weak||'').trim();
+ document.getElementById('nxFocus').textContent=weak?weak.split(',')[0]:'Balanced';
+ document.getElementById('nxTodayTasks').innerHTML=nxTodayTasks(p);
+ document.getElementById('nxTimetableSub').textContent=(p.time||'Your selected study time')+' • '+(p.subjects||[]).length+' subjects';
+ document.getElementById('nxTimetableContent').innerHTML=nxTimetable(p);
  document.getElementById('nxRoadmapContent').innerHTML=nxRoadmap(p);
  document.getElementById('nxProfileDetails').innerHTML=[
- ['Class / Degree',p.class||p.degree],['Board',p.board],['Stream',p.stream],['Subjects',(p.subjects||[]).join(', ')],
- ['Goal',p.goalText],['Competitive Exam',p.competitiveExam],['Study Time',p.time],['Weak Subjects',p.weak]
+ ['Class / Degree',cls],['Board',p.board],['Stream',p.stream],['Subjects',(p.subjects||[]).join(', ')],
+ ['Goal',p.goalText],['Competitive Exam',p.competitiveExam],['Daily Study Time',p.time],['Current Level',p.level],
+ ['Strong Subjects',p.strong],['Weak Subjects / Topics',p.weak]
  ].filter(x=>x[1]).map(x=>'<div class="nx-profile-row"><span>'+nxEsc(x[0])+'</span><b>'+nxEsc(x[1])+'</b></div>').join('');
  nxHistory();
  const store=nxPlannerData(),done=Object.values(store).filter(Boolean).length,pct=Math.min(100,Math.round(done/63*100));
  document.getElementById('nxPct').textContent=pct+'%';document.getElementById('nxTaskCount').textContent=done;
+ const notes=localStorage.getItem('nexora_notes_'+(currentUser?.email||'x'));document.getElementById('nxNotes').value=notes||'';
 }
 function nxTodayTasks(p){
- const subs=(p.subjects||[]).filter(Boolean),weak=(p.weak||'').toLowerCase(),items=[];
- if(!subs.length)return '<p class="nx-sub">No subjects saved yet.</p>';
- subs.forEach((sub,i)=>{
-  const isWeak=weak&&weak.split(',').some(w=>w.trim()&&sub.toLowerCase().includes(w.trim()));
-  items.push({id:'nx-'+i,title:(isWeak?'Focus: ':'Study: ')+sub,meta:(isWeak?'Extra practice • ':'Practice + revision • ')+(Math.max(15,Math.round(60/subs.length)))+' min'});
- });
+ const subs=(p.subjects||[]).filter(x=>x&&x!=='Other'),weak=(p.weak||'').toLowerCase(),items=[];
+ if(!subs.length)return '<p class="nx-sub">No subjects saved yet. Edit your profile and choose subjects.</p>';
+ const m=plannerMinutes(p.time),weights=subs.map(x=>plannerWeak(x,p)?1.5:1),sum=weights.reduce((a,b)=>a+b,0);
+ if(new Date().getDay()===0)items.push({id:'weekly-review',title:'Weekly review',meta:'Review your notes, mistakes and unfinished work.'});
+ subs.forEach((sub,i)=>items.push({id:'nx-'+i,title:(plannerWeak(sub,p)?'Focus: ':'Study: ')+sub,meta:Math.max(10,Math.round(m*weights[i]/sum))+' min • concepts + practice'}));
+ if(items.length<4)items.push({id:'revision',title:'Quick revision',meta:'10–15 min • formulas, definitions or key notes'});
  return items.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="nxTask(this,\''+x.id+'\')"><span><span class="task-title">'+nxEsc(x.title)+'</span><div class="task-meta">'+nxEsc(x.meta)+'</div></span></label>').join('');
 }
 function nxTask(cb,id){
  const key='nexora_tasks_'+(currentUser?.email||'x'),d=JSON.parse(localStorage.getItem(key)||'{}');d[id]=cb.checked;localStorage.setItem(key,JSON.stringify(d));nxRender();
 }
+function nxTimetable(p){
+ const subs=(p.subjects||[]).filter(x=>x&&x!=='Other');if(!subs.length)return '<div class="nx-sub">Select subjects first.</div>';
+ const m=plannerMinutes(p.time), slots=[];
+ let remaining=m;
+ const weak=subs.filter(x=>plannerWeak(x,p));
+ const focus=weak[0]||subs[0];
+ const warm=Math.min(10,Math.max(5,Math.round(m*.08)));remaining-=warm;
+ slots.push(['Start','Warm-up + plan',warm+' min']);
+ const usable=Math.max(15,remaining);
+ const base=Math.max(15,Math.floor(usable/subs.length));
+ subs.forEach((sub,i)=>slots.push(['Session '+(i+1),sub,Math.max(15,base+(plannerWeak(sub,p)?10:0))+' min • learn + practice']));
+ slots.push(['Finish','Revision + mistakes',Math.max(10,Math.min(20,Math.round(m*.1)))+' min']);
+ return slots.map(x=>'<div class="nx-time-row"><div class="nx-time">'+nxEsc(x[0])+'</div><div class="nx-time-card"><b>'+nxEsc(x[1])+'</b><small>'+nxEsc(x[2])+(x[1]===focus?' • extra focus':'')+'</small></div></div>').join('');
+}
 function nxRoadmap(p){
- const comp=p.competitiveExam?' for '+nxEsc(p.competitiveExam):'';
+ const exam=p.competitiveExam?' for '+nxEsc(p.competitiveExam):'';
  return [
- ['1','Foundation','Build your daily routine and cover the core topics'+comp+'.'],
- ['2','Practice','Increase question practice and give extra time to weak subjects.'],
- ['3','Test & Improve','Take progress tests, analyse mistakes and revise weak topics.'],
- ['4','Goal Completion','Finish the goal, review your progress and mark the goal complete.']
+ ['1','Foundation','Days 1–7: build the routine, cover core topics'+exam+' and take Test 1.'],
+ ['2','Practice','Days 8–14: increase questions and give extra time to weak subjects.'],
+ ['3','Improve','Days 15–21: analyse mistakes, revise and take the final test.'],
+ ['4','Next cycle','After Day 21: use unfinished work and mistakes to build the next cycle.']
  ].map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="nx-sub" style="margin-top:4px">'+x[2]+'</div></div></div>').join('');
 }
 function nxHistory(){
  const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
  document.getElementById('nxGoalHistory').innerHTML=h.length?h.map(x=>'<div class="nx-history"><span>'+nxEsc(x.goal)+'</span><span class="nx-complete">✓ Completed</span></div>').join(''):'<div class="nx-sub">No completed goals yet.</div>';
 }
+function nxEditProfile(){if(typeof openStudent==='function')openStudent();else alert('Profile editor is unavailable.')}
+function nxLogout(){if(typeof logout==='function')logout();else location.reload()}
+let nxTimerSeconds=25*60,nxTimerId=null;
+function nxTimerPaint(){const m=String(Math.floor(nxTimerSeconds/60)).padStart(2,'0'),s=String(nxTimerSeconds%60).padStart(2,'0');const el=document.getElementById('nxTimer');if(el)el.textContent=m+':'+s}
+function nxTimerStart(){if(nxTimerId)return;nxTimerId=setInterval(()=>{if(nxTimerSeconds>0){nxTimerSeconds--;nxTimerPaint()}else{clearInterval(nxTimerId);nxTimerId=null;alert('Focus session complete! Take a short break.')}},1000)}
+function nxTimerPause(){clearInterval(nxTimerId);nxTimerId=null}
+function nxTimerReset(){nxTimerPause();nxTimerSeconds=25*60;nxTimerPaint()}
+function nxSaveNotes(){localStorage.setItem('nexora_notes_'+(currentUser?.email||'x'),document.getElementById('nxNotes').value);alert('Notes saved.')}
 function nxCompleteGoal(){
  const p=nxProfile();if(!p)return;
  const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
