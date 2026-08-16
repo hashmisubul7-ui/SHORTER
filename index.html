@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NEXORA — Your Goal. Your Next Step.</title>
+<title>NEXORA — Study, Focus, Achieve</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#17171c;background:#fff}
 button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
@@ -78,35 +78,57 @@ body.nx-logged-in #about,
 body.nx-logged-in #contact{display:none!important}
 body.nx-logged-in .nx-app-shell{min-height:calc(100vh - 80px)}
 
-/* REAL LOGGED-IN APP MODE */
-body.nx-logged-in > nav,
-body.nx-logged-in > .hero,
-body.nx-logged-in > section,
-body.nx-logged-in > footer,
-body.nx-logged-in > .dashboard {display:none!important}
-body.nx-logged-in{background:#f6f7fb!important}
-body.nx-logged-in #nxApp{display:block!important}
-.nx-app-shell{padding-bottom:95px}
-.nx-app-header{position:sticky;top:0;z-index:40;background:rgba(246,247,251,.96);backdrop-filter:blur(12px);padding:10px 0 12px}
-.nx-brandline{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.nx-brandline .nx-brand{font-size:23px;font-weight:900;letter-spacing:-.8px}
-.nx-brandline .nx-brand span{color:#5b55e8}
-.nx-page{min-height:55vh}
-.nx-page.active{display:block!important}
-.nx-section-title{font-size:25px;margin:4px 0 5px;letter-spacing:-.5px}
-.nx-section-sub{color:#777b8c;margin:0 0 16px}
-.nx-timetable{display:grid;gap:10px}
-.nx-time-row{display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:stretch}
-.nx-time{display:flex;align-items:center;justify-content:center;background:#eeeefe;color:#5149c8;border-radius:13px;font-weight:900;font-size:13px}
-.nx-time-card{background:#fff;border:1px solid #e8e9f1;border-radius:15px;padding:13px}
-.nx-time-card b{display:block}.nx-time-card small{display:block;color:#777;margin-top:4px}
-.nx-zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.nx-timer{font-size:46px;font-weight:900;text-align:center;letter-spacing:-2px;margin:12px 0}
-.nx-zone-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.nx-note{width:100%;min-height:160px;border:1px solid #e8e9f1;border-radius:14px;padding:13px;resize:vertical;outline:none;background:#fff}
-.nx-pill{display:inline-block;padding:6px 9px;border-radius:999px;background:#eeeefe;color:#5149c8;font-size:11px;font-weight:800}
-.nx-danger{color:#b42318}
-@media(max-width:650px){.nx-zone-grid{grid-template-columns:1fr}.nx-time-row{grid-template-columns:70px 1fr}.nx-time{font-size:11px}}
+/* NEXORA V4: theme + timetable + self-study */
+html{scroll-behavior:smooth}
+body.nx-dark{
+  --nx-bg:#0f1117;--nx-card:#171a22;--nx-text:#f4f6fb;--nx-muted:#a7adbd;--nx-accent:#7c73ff;--nx-border:#2a2f3b;
+  background:#0f1117!important;color:#f4f6fb!important;
+}
+body.nx-dark header,body.nx-dark nav{background:rgba(15,17,23,.96)!important;border-color:#2a2f3b!important}
+body.nx-dark .nx-card,body.nx-dark .nx-stat,body.nx-dark .nx-secondary,body.nx-dark .nx-nav,
+body.nx-dark .nx-icon-btn{background:#171a22!important;color:#f4f6fb!important;border-color:#2a2f3b!important}
+body.nx-dark .nx-sub,body.nx-dark .muted{color:#a7adbd!important}
+body.nx-dark .nx-stat{background:#12151c!important}
+body.nx-dark .nx-nav button{color:#a7adbd}
+body.nx-dark .nx-nav button.active{background:#28254a;color:#9b95ff}
+body.nx-dark input,body.nx-dark textarea,body.nx-dark select{
+  background:#12151c!important;color:#f4f6fb!important;border-color:#343a48!important
+}
+body.nx-dark .task-row,body.nx-dark .nx-profile-row{border-color:#2a2f3b}
+body.nx-dark .modalbox{background:#171a22;color:#f4f6fb}
+.nx-wide-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.nx-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.nx-mini-btn{border:1px solid var(--nx-border);background:var(--nx-card);color:var(--nx-text);border-radius:11px;padding:9px 12px;font-weight:800;cursor:pointer}
+.nx-timer{font-size:64px;line-height:1;font-weight:900;text-align:center;letter-spacing:-3px;margin:22px 0}
+.nx-timer-presets{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.nx-timer-presets button{border:1px solid var(--nx-border);background:var(--nx-card);color:var(--nx-text);border-radius:10px;padding:8px 12px;font-weight:800}
+.nx-doubt-preview{max-width:100%;max-height:220px;border-radius:14px;margin-top:10px;display:none}
+.nx-input,.nx-textarea,.nx-select{width:100%;padding:12px;border:1px solid var(--nx-border);border-radius:12px;background:var(--nx-card);color:var(--nx-text);outline:none}
+.nx-textarea{min-height:130px;resize:vertical}
+.nx-table{width:100%;border-collapse:collapse}
+.nx-table th,.nx-table td{padding:11px 8px;border-bottom:1px solid var(--nx-border);text-align:left;vertical-align:top}
+.nx-table th{font-size:12px;color:var(--nx-muted)}
+.nx-day-card{border:1px solid var(--nx-border);border-radius:15px;padding:13px;margin-bottom:10px}
+.nx-day-card h4{margin:0 0 8px}
+.nx-empty{padding:18px;border:1px dashed var(--nx-border);border-radius:14px;color:var(--nx-muted)}
+.nx-setting-row{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:14px 0;border-bottom:1px solid var(--nx-border)}
+.nx-setting-row:last-child{border-bottom:0}
+@media(max-width:780px){.nx-wide-grid{grid-template-columns:1fr}.nx-timer{font-size:54px}.nx-table{font-size:13px}}
+
+
+.nx-q-grid{display:grid;grid-template-columns:1fr 2fr 1fr .8fr;gap:12px;margin-top:16px}
+.nx-label{display:block;font-weight:800;font-size:13px;margin:0 0 6px}
+.nx-tag{display:inline-block;padding:7px 11px;border-radius:999px;background:#eeecff;color:#554bc7;font-size:11px;font-weight:800}
+.nx-question{padding:15px;border:1px solid var(--nx-border,#e7e7ee);border-radius:14px;margin-bottom:10px;background:var(--nx-card,#fff)}
+.nx-question h4{margin:0 0 8px}
+.nx-answer{width:100%;min-height:85px;padding:11px;border:1px solid var(--nx-border,#ddd);border-radius:10px;background:transparent;color:inherit;resize:vertical}
+.nx-q-meta{font-size:12px;opacity:.7;margin-bottom:8px}
+.nx-q-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.nx-correct{border-left:4px solid #35a66f}
+.nx-note{padding:10px 12px;border-radius:10px;background:rgba(99,91,219,.08);margin-top:8px;font-size:13px}
+@media(max-width:800px){.nx-q-grid{grid-template-columns:1fr 1fr}.nx-q-grid>div:nth-child(2){grid-column:span 2}}
+@media(max-width:520px){.nx-q-grid{grid-template-columns:1fr}.nx-q-grid>div:nth-child(2){grid-column:auto}}
+
 </style>
 </head>
 <body>
@@ -168,118 +190,211 @@ body.nx-logged-in #nxApp{display:block!important}
 </div>
 </div>
 
-
 <div id="nxApp" style="display:none">
   <div class="nx-app-shell">
-    <div class="nx-app-header">
-      <div class="nx-brandline">
-        <div class="nx-brand">NEX<span>O</span>RA</div>
-        <div class="nx-top-actions">
-          <button class="nx-icon-btn" onclick="nxOpenProfile()">👤 Profile</button>
-          <button class="nx-icon-btn" onclick="nxOpenSettings()">⚙️</button>
-        </div>
+    <div class="nx-welcome">
+      <div>
+        <h1 id="nxHello">Welcome back 👋</h1>
+        <div class="nx-sub" id="nxGoalSmall">Your next step starts today.</div>
+      </div>
+      <div class="nx-top-actions">
+        <button class="nx-icon-btn" onclick="nxGo('questions')">📚 Questions</button>
+        <button class="nx-icon-btn" onclick="nxOpenProfile()">👤 Profile</button>
+        <button class="nx-icon-btn" onclick="nxSetTheme(document.body.classList.contains('nx-dark')?'light':'dark')">🌓</button>
+        <button class="nx-icon-btn" onclick="nxOpenSettings()">⚙️</button>
       </div>
     </div>
 
-    <main>
-      <section id="nxHome" class="nx-page active">
-        <div class="nx-welcome">
-          <div><h1 id="nxHello">Welcome back 👋</h1><div class="nx-sub" id="nxGoalSmall">Your next step starts today.</div></div>
-        </div>
-        <div class="nx-grid">
-          <div class="nx-card nx-goal">
-            <div style="font-size:12px;font-weight:800;opacity:.8">ACTIVE GOAL</div>
-            <h2 id="nxGoal" style="margin:7px 0"></h2>
-            <div class="nx-sub" id="nxGoalMeta"></div>
-            <div class="nx-actions">
-              <button class="nx-primary" onclick="nxGo('today')">✅ Today's Tasks</button>
-              <button class="nx-secondary" onclick="nxGo('timetable')">📅 Timetable</button>
-            </div>
-          </div>
-          <div class="nx-card">
-            <h3>Progress</h3>
-            <div class="nx-stat-grid">
-              <div class="nx-stat"><b id="nxPct">0%</b><span>21-day progress</span></div>
-              <div class="nx-stat"><b id="nxTaskCount">0</b><span>tasks done</span></div>
-              <div class="nx-stat"><b id="nxFocus">—</b><span>weak focus</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="nx-card" style="margin-top:14px">
-          <h3>Continue studying</h3>
+    <section id="nxHome" class="nx-page active">
+      <div class="nx-grid">
+        <div class="nx-card nx-goal">
+          <div style="font-size:12px;font-weight:800;opacity:.8">ACTIVE GOAL</div>
+          <h2 id="nxGoal" style="margin:7px 0"></h2>
+          <div class="nx-sub" id="nxGoalMeta"></div>
           <div class="nx-actions">
-            <button class="nx-primary" onclick="nxGo('studyzone')">🧠 Self Study Zone</button>
-            <button class="nx-secondary" onclick="nxGo('roadmap')">🗺️ Goal Roadmap</button>
-            <button class="nx-secondary" onclick="nxOpenProfile()">👤 My Profile</button>
+            <button class="nx-primary" onclick="nxGo('today')">View Today's Tasks</button>
+            <button class="nx-secondary" onclick="nxGo('roadmap')">View Roadmap</button>
           </div>
         </div>
-      </section>
-
-      <section id="nxToday" class="nx-page">
-        <h2 class="nx-section-title">Today</h2><p class="nx-section-sub">Your tasks are generated from your subjects, study time and weak areas.</p>
-        <div class="nx-card"><div id="nxTodayTasks"></div></div>
-      </section>
-
-      <section id="nxTimetable" class="nx-page">
-        <h2 class="nx-section-title">My Timetable</h2><p class="nx-section-sub" id="nxTimetableSub"></p>
-        <div class="nx-card"><div id="nxTimetableContent" class="nx-timetable"></div></div>
-      </section>
-
-      <section id="nxRoadmap" class="nx-page">
-        <h2 class="nx-section-title">Goal Roadmap</h2><p class="nx-section-sub">A 21-day cycle that moves you toward your active goal.</p>
-        <div class="nx-card"><div id="nxRoadmapContent"></div></div>
-        <div class="nx-card" style="margin-top:12px">
-          <h3>Goal completion</h3><p class="nx-sub">When this specific goal is achieved, finish this cycle and set a new goal. The ₹1499 plan applies to one goal cycle only.</p>
-          <button class="nx-primary" onclick="nxCompleteGoal()">🎯 Mark This Goal Completed</button>
-        </div>
-      </section>
-
-      <section id="nxStudyzone" class="nx-page">
-        <h2 class="nx-section-title">Self Study Zone</h2><p class="nx-section-sub">A distraction-free place to focus, track a session and keep notes.</p>
-        <div class="nx-zone-grid">
-          <div class="nx-card">
-            <span class="nx-pill">FOCUS TIMER</span>
-            <div id="nxTimer" class="nx-timer">25:00</div>
-            <div class="nx-zone-actions">
-              <button class="nx-primary" onclick="nxTimerStart()">▶ Start</button>
-              <button class="nx-secondary" onclick="nxTimerPause()">⏸ Pause</button>
-              <button class="nx-secondary" onclick="nxTimerReset()">↻ Reset</button>
-            </div>
-            <p class="nx-sub" style="text-align:center;margin-top:12px">Choose a subject from your timetable, then start a focused session.</p>
-          </div>
-          <div class="nx-card">
-            <span class="nx-pill">STUDY NOTES</span>
-            <textarea id="nxNotes" class="nx-note" placeholder="Write what you learned, mistakes to revise, or questions for later..."></textarea>
-            <button class="nx-primary" style="margin-top:9px" onclick="nxSaveNotes()">Save Notes</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="nxProfile" class="nx-page">
-        <h2 class="nx-section-title">My Profile</h2><p class="nx-section-sub">Your study setup and current goal.</p>
         <div class="nx-card">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3>Student details</h3><button class="nx-secondary" onclick="nxEditProfile()">Edit Profile & Goal</button></div>
-          <div id="nxProfileDetails"></div>
+          <h3>Progress</h3>
+          <div class="nx-stat-grid">
+            <div class="nx-stat"><b id="nxPct">0%</b><span>21-day progress</span></div>
+            <div class="nx-stat"><b id="nxTaskCount">0</b><span>tasks done</span></div>
+            <div class="nx-stat"><b id="nxFocus">—</b><span>focus</span></div>
+          </div>
         </div>
-        <div class="nx-card" style="margin-top:12px"><h3>Goal History</h3><div id="nxGoalHistory" class="nx-goal-history"></div></div>
-      </section>
+      </div>
+      <div class="nx-card" style="margin-top:14px">
+        <h3>Quick access</h3>
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxGo('today')">✅ Today</button>
+          <button class="nx-secondary" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
+          <button class="nx-secondary" onclick="nxOpenProfile()">👤 My Profile</button>
+          <button class="nx-secondary" onclick="nxGo('questions')">📚 Questions</button>
+          <button class="nx-secondary" onclick="nxOpenSettings()">⚙️ Settings</button>
+        </div>
+      </div>
+    </section>
 
-      <section id="nxSettings" class="nx-page">
-        <h2 class="nx-section-title">Settings</h2><p class="nx-section-sub">Account and plan controls.</p>
-        <div class="nx-card">
-          <div class="nx-profile-row"><span>Account</span><b id="nxAccount"></b></div>
-          <div class="nx-profile-row"><span>Plan</span><b id="nxPlan">Free</b></div>
-          <div class="nx-actions"><button class="nx-secondary" onclick="nxLogout()">Log out</button></div>
+    <section id="nxToday" class="nx-page">
+      <div class="nx-card">
+        <h3>Today's Tasks</h3>
+        <div id="nxTodayTasks"></div>
+      </div>
+    </section>
+
+    <section id="nxRoadmap" class="nx-page">
+      <div class="nx-card">
+        <h3>Goal Roadmap</h3>
+        <div id="nxRoadmapContent"></div>
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxCompleteGoal()">🎯 Mark Goal Completed</button>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+    <section id="nxTimetable" class="nx-page">
+      <div class="nx-card">
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+          <div><h3>📅 Your Timetable</h3><div class="nx-sub">A 7-day plan generated from your subjects, daily study time and weak areas.</div></div>
+          <button class="nx-primary" onclick="nxBuildTimetable(true)">↻ Regenerate</button>
+        </div>
+        <div id="nxTimetableContent" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <section id="nxStudy" class="nx-page">
+      <div class="nx-wide-grid">
+        <div class="nx-card">
+          <h3>🧠 Self Study Zone</h3>
+          <div class="nx-sub">Set your own focus time. Your session can be 5–180 minutes.</div>
+          <div class="nx-timer" id="nxTimerDisplay">25:00</div>
+          <div class="nx-timer-presets">
+            <button onclick="nxSetTimer(25)">25 min</button>
+            <button onclick="nxSetTimer(50)">50 min</button>
+            <button onclick="nxSetTimer(90)">90 min</button>
+            <button onclick="nxSetTimer(120)">120 min</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <input id="nxCustomMinutes" class="nx-input" type="number" min="5" max="180" placeholder="Custom minutes (5–180)">
+            <button class="nx-primary" onclick="nxSetCustomTimer()">Set</button>
+          </div>
+          <div class="nx-actions" style="justify-content:center">
+            <button class="nx-primary" onclick="nxStartTimer()">▶ Start</button>
+            <button class="nx-secondary" onclick="nxPauseTimer()">⏸ Pause</button>
+            <button class="nx-secondary" onclick="nxResetTimer()">↻ Reset</button>
+          </div>
+        </div>
+
+        <div class="nx-card">
+          <h3>❓ Doubt Zone</h3>
+          <div class="nx-sub">Type your doubt or attach a photo of a question from your phone.</div>
+          <textarea id="nxDoubtText" class="nx-textarea" placeholder="Write your doubt here..."></textarea>
+          <input id="nxDoubtPhoto" type="file" accept="image/*" capture="environment" style="margin-top:10px;width:100%">
+          <img id="nxDoubtPreview" class="nx-doubt-preview" alt="Question preview">
+          <div class="nx-actions">
+            <button class="nx-primary" onclick="nxSaveDoubt()">Save Doubt</button>
+            <button class="nx-secondary" onclick="nxClearDoubt()">Clear</button>
+          </div>
+          <div id="nxDoubtList" style="margin-top:12px"></div>
+        </div>
+      </div>
+
+      <div class="nx-card" style="margin-top:14px">
+        <h3>📝 Study Notes</h3>
+        <textarea id="nxStudyNote" class="nx-textarea" placeholder="Write what you learned, mistakes to revise, formulas, or questions for later..."></textarea>
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxSaveStudyNote()">Save Note</button>
+        </div>
+        <div id="nxNotesList" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+
+    <section id="nxQuestions" class="nx-page">
+      <div class="nx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div>
+            <h3>📚 Question & PYQ Lab</h3>
+            <div class="nx-sub">Topic डालो → practice questions automatically बनेंगे. Genuine previous-year questions are shown only when they exist in the built-in library.</div>
+          </div>
+          <span class="nx-tag">PRACTICE + PYQ</span>
+        </div>
+
+        <div class="nx-q-grid">
+          <div>
+            <label class="nx-label">Subject</label>
+            <select id="nxQSubject" class="nx-input">
+              <option>Physics</option><option>Chemistry</option><option>Mathematics</option>
+              <option>Biology</option><option>English</option><option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="nx-label">Topic</label>
+            <input id="nxQTopic" class="nx-input" placeholder="e.g. Newton's Laws, Quadratic Equations">
+          </div>
+          <div>
+            <label class="nx-label">Level</label>
+            <select id="nxQLevel" class="nx-input">
+              <option>Easy</option><option selected>JEE/Exam Level</option><option>Hard</option>
+            </select>
+          </div>
+          <div>
+            <label class="nx-label">Questions</label>
+            <select id="nxQCount" class="nx-input">
+              <option>5</option><option selected>10</option><option>15</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxGenerateQuestions()">⚡ Generate Questions</button>
+          <button class="nx-secondary" onclick="nxLoadSavedQuestions()">↻ Restore Last Set</button>
+        </div>
+
+        <div id="nxQuestionStatus" class="nx-sub" style="margin-top:10px"></div>
+        <div id="nxQuestionList" style="margin-top:14px"></div>
+      </div>
+
+      <div class="nx-card" style="margin-top:14px">
+        <h3>📝 Your Answer Practice</h3>
+        <div class="nx-sub">Question select karo, answer likho, then check your working yourself. This keeps the static GitHub version safe—no paid AI/API key required.</div>
+        <div id="nxQuestionPractice"></div>
+      </div>
+    </section>
+
+    <section id="nxProfile" class="nx-page">
+      <div class="nx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <h3>My Profile</h3><button class="nx-secondary" onclick="nxEditProfile()">Edit Profile & Goal</button>
+        </div>
+        <div id="nxProfileDetails"></div>
+        <h3 style="margin-top:20px">Goal History</h3>
+        <div id="nxGoalHistory" class="nx-goal-history"></div>
+      </div>
+    </section>
+
+    <section id="nxSettings" class="nx-page">
+      <div class="nx-card">
+        <h3>⚙️ Settings</h3>
+        <div class="nx-setting-row"><span>Account</span><b id="nxAccount"></b></div>
+        <div class="nx-setting-row"><span>Plan</span><b id="nxPlan">Free</b></div>
+        <div class="nx-setting-row"><span>Theme</span><div class="nx-toolbar">
+          <button class="nx-mini-btn" onclick="nxSetTheme('light')">☀️ Light</button>
+          <button class="nx-mini-btn" onclick="nxSetTheme('dark')">🌙 Dark</button>
+          <button class="nx-mini-btn" onclick="nxSetTheme('system')">📱 System</button>
+        </div></div>
+        <div class="nx-actions"><button class="nx-secondary" onclick="nxLogout()">Log out</button></div>
+      </div>
+    </section>
   </div>
+
   <nav class="nx-nav">
     <button id="nxNavHome" class="active" onclick="nxGo('home')">🏠 Home</button>
     <button id="nxNavToday" onclick="nxGo('today')">✅ Today</button>
     <button id="nxNavTimetable" onclick="nxGo('timetable')">📅 Timetable</button>
     <button id="nxNavRoadmap" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
-    <button id="nxNavStudyzone" onclick="nxGo('studyzone')">🧠 Study</button>
+    <button id="nxNavStudy" onclick="nxGo('study')">🧠 Study</button>
     <button id="nxNavProfile" onclick="nxOpenProfile()">👤 Profile</button>
   </nav>
 </div>
@@ -303,9 +418,10 @@ body.nx-logged-in #nxApp{display:block!important}
 <div id="classWrap"><label>Class</label><select id="studentClass" onchange="updateClassFields()"><option value="">Select class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select></div>
 <div id="streamWrap" style="display:none"><label>Stream</label><select id="streamSelect" onchange="streamChanged()">
 <option value="">Select stream</option>
-<option value="maths">Maths</option>
-<option value="bio">Biology</option>
+<option value="maths">Maths / PCM</option>
+<option value="bio">Biology / PCB</option>
 <option value="commerce">Commerce</option>
+<option value="humanities">Humanities</option>
 <option value="other">Other</option>
 </select></div>
 <div id="otherStreamWrap" class="full" style="display:none"><label>Your stream</label><input id="otherStream" placeholder="Write your stream in your own words"></div>
@@ -323,6 +439,7 @@ body.nx-logged-in #nxApp{display:block!important}
 <div><label>Current level</label><select id="level"><option value="">Select level</option><option>Needs a lot of help</option><option>Needs improvement</option><option>Okay</option><option>Good</option><option>Very strong</option></select></div>
 <div class="full"><label>Strong subjects</label><input id="strongSubjects" placeholder="e.g. English, Maths"></div>
 <div class="full"><label>Weak subjects / topics</label><input id="weakSubjects" placeholder="e.g. Physics numericals, Algebra"></div>
+<div class="full"><label>Missing past work</label><textarea id="pastWork" placeholder="e.g. Chapter 3 notes, 2 homework sheets, missed test..."></textarea></div>
 </div>
 <p id="studentError" class="auth-msg"></p>
 <div class="actions"><button class="btn light" onclick="closeStudent()">Cancel</button><button class="btn primary" onclick="createStudentProfile()">Create My Profile →</button></div>
@@ -344,15 +461,17 @@ function logout(){
  currentUser=null;
  localStorage.removeItem('shorterUser');
  document.body.classList.remove('nx-logged-in');
- const app=document.getElementById('nxApp');if(app)app.style.display='none';
+ document.getElementById('nxApp').style.display='none';
+ document.getElementById('dashboard').classList.remove('show');
  document.getElementById('authBtn').textContent='Sign in';
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function showDashboard(){
  if(!currentUser)return;
  document.getElementById('authBtn').textContent='Dashboard';
- try{nxShowApp();nxGo('home');}catch(e){}
+ try{nxShowApp();}catch(e){}
  updateDashboard();
+ window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free';let sp=document.getElementById('studentStatus');if(sp)sp.textContent=currentUser.studentProfile?'Ready':'Not set';let box=document.getElementById('studentPlanPreview');if(box&&currentUser.studentProfile){let p=currentUser.studentProfile;box.style.display='block';document.getElementById('studentPlanTitle').textContent=p.goalText||'Your Study Goal';let detail=[p.type==='school'?p.board+' • '+p.cls:p.degree+' • '+p.year,p.stream?'Stream: '+p.stream:'',p.competitiveExam?'Exam: '+p.competitiveExam:'',p.time?'Study time: '+p.time:'',p.level?'Level: '+p.level:''].filter(Boolean).join(' | ');document.getElementById('studentPlanDetails').textContent=detail||'Your profile is saved.';let pl=document.getElementById('studentPlanner');if(pl){pl.style.display='block';makePlanner(p)}}else if(box){box.style.display='none'}}
 function closeProfileSuccess(){
@@ -371,7 +490,7 @@ function choosePro(plan){currentUser.plan='Pro';localStorage.setItem('shorterUse
 function creatorTrial(){if(!currentUser)return openAuth('signup');choosePro('30-day Creator Pro trial')}
 function downloadWallpaper(name){show('Download selected',name+' — connect file storage to enable real downloads.')}
 function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
-window.addEventListener('load',()=>{if(currentUser){try{nxShowApp();nxGo('home');}catch(e){}}});
+window.addEventListener('load',()=>{nxLoadTheme();if(currentUser){try{nxShowApp();}catch(e){}showDashboard();}});
 
 function openStudent(){
   if(!currentUser){
@@ -379,9 +498,21 @@ function openStudent(){
     openAuth('login');
     return;
   }
-  setStudyType('school');
-  document.getElementById('otherBoardWrap').style.display='none';
-  renderSubjects('school');
+  const p=currentUser.studentProfile||{};
+  setStudyType(p.type==='college'?'college':'school');
+  if(p.board){document.getElementById('boardSelect').value=['CBSE','ICSE','ISC','MP Board','UP Board','RBSE','BSEB','WBCHSE','Maharashtra State Board','Karnataka State Board','Kerala State Board','Tamil Nadu State Board','Andhra Pradesh State Board','Telangana State Board','Gujarat State Board'].includes(p.board)?p.board:'Other';boardChanged();if(document.getElementById('boardSelect').value==='Other')document.getElementById('otherBoard').value=p.board}
+  if(p.cls){document.getElementById('studentClass').value=p.cls;updateClassFields()}
+  if(p.stream){const known=['maths','bio','commerce','humanities'];document.getElementById('streamSelect').value=known.includes(p.stream)?p.stream:'other';streamChanged();if(document.getElementById('streamSelect').value==='other')document.getElementById('otherStream').value=p.stream}
+  if(p.goal){document.getElementById('studentGoal').value=p.goal;goalChanged()}
+  if(p.competitiveExam){const opts=[...document.getElementById('competitiveExam').options].map(o=>o.value||o.text);document.getElementById('competitiveExam').value=opts.includes(p.competitiveExam)?p.competitiveExam:'Other';competitiveExamChanged();if(document.getElementById('competitiveExam').value==='Other')document.getElementById('otherExam').value=p.competitiveExam}
+  document.getElementById('studyTime').value=p.time||'';
+  document.getElementById('level').value=p.level||'';
+  document.getElementById('strongSubjects').value=p.strong||'';
+  document.getElementById('weakSubjects').value=p.weak||'';
+  document.getElementById('pastWork').value=p.pastWork||'';
+  renderSubjects(p.type==='college'?'college':'school');
+  setTimeout(()=>{(p.subjects||[]).forEach(s=>{const el=[...document.querySelectorAll('#subjectList input')].find(x=>x.value===s);if(el)el.checked=true})},0);
+  document.getElementById('studentError').textContent='';
   document.getElementById('studentModal').classList.add('show');
 }
 
@@ -392,7 +523,8 @@ function closeStudent(){
 const subjectSets={
  primary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
  secondary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
- science:['Physics','Chemistry','Mathematics','Biology','English','Computer Science','Physical Education','Other'],
+ maths:['Physics','Chemistry','Mathematics','English','Computer Science','Physical Education','Other'],
+ bio:['Physics','Chemistry','Biology','English','Computer Science','Physical Education','Other'],
  commerce:['Accountancy','Business Studies','Economics','Mathematics / Applied Mathematics','English','Computer Science','Physical Education','Other'],
  humanities:['History','Geography','Political Science','Economics','English','Sociology','Psychology','Physical Education','Other'],
  college:['Physics','Chemistry','Mathematics','Biology','English','Accountancy','Business Studies','Economics','History','Geography','Political Science','Computer / IT','Other']
@@ -463,9 +595,10 @@ function createStudentProfile(){
  if(g==='competitive'&&exam==='Other') exam=document.getElementById('otherExam').value.trim();
  let customStream=school&&document.getElementById('streamSelect').value==='other'?document.getElementById('otherStream').value.trim():'';
  let goalText={top:'Top my current class',percent:'Achieve '+document.getElementById('targetPercent').value+'%',subject:'Become strong in a subject',exam:'Prepare for my current exam',competitive:'Prepare for '+exam,next:'Prepare for the next class',future:'Prepare for a future exam',custom:document.getElementById('customGoal').value.trim()}[g];
- currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?(document.getElementById('streamSelect').value==='other'?customStream:document.getElementById('streamSelect').value):'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
+ currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?(document.getElementById('streamSelect').value==='other'?customStream:document.getElementById('streamSelect').value):'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim(),pastWork:document.getElementById('pastWork').value.trim(),goalDone:false};
  let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
  closeStudent();
+showDashboard();
 try{nxShowApp();nxGo('home');}catch(e){}
 show('Your Study Plan is ready!','NEXORA created your timetable, daily tasks, 21-day test cycle and goal roadmap. Open Today or Roadmap from the app navigation.');
 }
@@ -478,22 +611,43 @@ function togglePlannerTask(id,checked){let d=JSON.parse(localStorage.getItem(pla
 function updatePlannerProgress(){let d=JSON.parse(localStorage.getItem(plannerKey())||'{}'),n=Object.values(d).filter(Boolean).length,p=Math.min(100,Math.round(n/63*100));let f=document.getElementById('plannerProgressFill'),t=document.getElementById('plannerProgressText');if(f)f.style.width=p+'%';if(t)t.textContent=p+'%';document.querySelectorAll('#todayTasks .task-row').forEach(r=>{let c=r.querySelector('input');if(c&&d[r.dataset.task]){c.checked=true;r.classList.add('done')}})}
 function makePlanner(p){let a=(p.subjects||[]).filter(Boolean),w=a.filter(x=>plannerWeak(x,p)),m=plannerMinutes(p.time);document.getElementById('plannerGoalLine').textContent=(p.goalText||'Your goal')+' • '+m+' min/day';document.getElementById('plannerFocusNote').innerHTML='<b>Adaptive focus:</b> '+(w.length?'Extra practice is reserved for '+w.join(', ')+'.':'Balanced time across your selected subjects.')+' Tests are planned for days 7, 14 and 21.';let today=plannerTasks(p,1);document.getElementById('todayTasks').innerHTML=today.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="togglePlannerTask(\''+x.id+'\',this.checked)"><span><span class="task-title">'+x.title+'</span><div class="task-meta">'+x.meta+'</div></span></label>').join('');document.getElementById('weekTasks').innerHTML=Array.from({length:7},(_,i)=>'<div class="task-row"><span>•</span><span class="task-title">Day '+(i+1)+': '+(i===6?'test + mistake review':(w.length?'extra '+w[0]+' practice + daily subject work':'complete your daily subject work'))+'</span></div>').join('');document.getElementById('testPlan').innerHTML=['Day 7 — progress test','Day 14 — progress test','Day 21 — final test + review'].map(x=>'<div class="task-row"><span>📝</span><span class="task-title">'+x+'</span></div>').join('');let steps=[['1','Foundation','Days 1–7: build the routine, study core topics and take the first test.'],['2','Practice','Days 8–14: increase question practice and focus on weak areas.'],['3','Improve','Days 15–21: revise mistakes and strengthen weak topics.'],['4','Repeat','After Day 21: use test mistakes and unfinished work to build the next cycle.']];document.getElementById('roadmapList').innerHTML=steps.map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="muted">'+x[2]+'</div></div></div>').join('');updatePlannerProgress()}
 
-
 function nxProfile(){return (typeof currentUser!=='undefined'&&currentUser)?currentUser.studentProfile:null}
 function nxEsc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function nxPlannerData(){return JSON.parse(localStorage.getItem('shorterPlanner_'+(currentUser?.email||'x'))||'{}')}
+function nxKey(name){return name+'_'+(currentUser?.email||'guest')}
+function nxSetTheme(mode){
+  localStorage.setItem('nexoraTheme',mode);
+  let actual=mode;
+  if(mode==='system')actual=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.body.classList.toggle('nx-dark',actual==='dark');
+}
+function nxLoadTheme(){nxSetTheme(localStorage.getItem('nexoraTheme')||'system')}
 function nxShowApp(){
  document.body.classList.add('nx-logged-in');
  const app=document.getElementById('nxApp');if(!app)return;
  app.style.display='block';
+ nxLoadTheme();
  if(nxProfile())nxRender();
+ else{
+   document.getElementById('nxHello').textContent='Welcome back 👋';
+   document.getElementById('nxGoal').textContent='Set your first study goal';
+   document.getElementById('nxGoalSmall').textContent='Create your student profile to build your timetable.';
+   document.getElementById('nxGoalMeta').textContent='Your personalized plan will appear here.';
+   document.getElementById('nxTodayTasks').innerHTML='<div class="nx-empty">Complete Student Setup to generate today’s tasks.</div>';
+   document.getElementById('nxRoadmapContent').innerHTML='<div class="nx-empty">Your roadmap will be created after you choose your goal.</div>';
+   document.getElementById('nxProfileDetails').innerHTML='<div class="nx-empty">No student profile yet.</div>';
+   document.getElementById('nxGoalHistory').innerHTML='<div class="nx-empty">No completed goals yet.</div>';
+   document.getElementById('nxTimetableContent').innerHTML='<div class="nx-empty">Create your profile first.</div>';
+ }
 }
 function nxGo(page){
- ['home','today','timetable','roadmap','studyzone','profile','settings'].forEach(x=>document.getElementById('nx'+x[0].toUpperCase()+x.slice(1))?.classList.remove('active'));
+ ['home','today','timetable','roadmap','study','profile','settings'].forEach(x=>document.getElementById('nx'+x[0].toUpperCase()+x.slice(1))?.classList.remove('active'));
  const el=document.getElementById('nx'+page[0].toUpperCase()+page.slice(1));if(el)el.classList.add('active');
  document.querySelectorAll('.nx-nav button').forEach(b=>b.classList.remove('active'));
  const nb=document.getElementById('nxNav'+page[0].toUpperCase()+page.slice(1));if(nb)nb.classList.add('active');
  window.scrollTo({top:0,behavior:'smooth'});
+ if(page==='timetable')nxBuildTimetable(false);
+ if(page==='study'){nxRenderDoubts();nxRenderNotes();}
 }
 function nxOpenProfile(){nxGo('profile')}
 function nxOpenSettings(){nxGo('settings')}
@@ -501,93 +655,252 @@ function nxRender(){
  const p=nxProfile();if(!p)return;
  const name=(currentUser?.name||'Student').split(' ')[0];
  document.getElementById('nxHello').textContent='Welcome back, '+name+' 👋';
- const cls=p.cls||p.class||p.degree||'Student';
  document.getElementById('nxGoal').textContent=p.goalText||'Your active goal';
- document.getElementById('nxGoalSmall').textContent=cls+(p.board?' • '+p.board:'');
- document.getElementById('nxGoalMeta').textContent=[cls,p.stream,p.competitiveExam].filter(Boolean).join(' • ');
+ document.getElementById('nxGoalSmall').textContent=(p.cls||p.degree||'Student')+(p.board?' • '+p.board:'');
+ document.getElementById('nxGoalMeta').textContent=[p.cls,p.stream,p.competitiveExam].filter(Boolean).join(' • ');
  document.getElementById('nxAccount').textContent=currentUser?.email||'Signed in';
  document.getElementById('nxPlan').textContent=currentUser?.plan||'Free';
- const weak=(p.weak||'').trim();
- document.getElementById('nxFocus').textContent=weak?weak.split(',')[0]:'Balanced';
- document.getElementById('nxTodayTasks').innerHTML=nxTodayTasks(p);
- document.getElementById('nxTimetableSub').textContent=(p.time||'Your selected study time')+' • '+(p.subjects||[]).length+' subjects';
- document.getElementById('nxTimetableContent').innerHTML=nxTimetable(p);
+ const weak=(p.weak||'').trim();document.getElementById('nxFocus').textContent=weak?weak.split(',')[0]:'Balanced';
+ const tasks=nxTodayTasks(p);document.getElementById('nxTodayTasks').innerHTML=tasks;
  document.getElementById('nxRoadmapContent').innerHTML=nxRoadmap(p);
  document.getElementById('nxProfileDetails').innerHTML=[
- ['Class / Degree',cls],['Board',p.board],['Stream',p.stream],['Subjects',(p.subjects||[]).join(', ')],
- ['Goal',p.goalText],['Competitive Exam',p.competitiveExam],['Daily Study Time',p.time],['Current Level',p.level],
- ['Strong Subjects',p.strong],['Weak Subjects / Topics',p.weak]
+  ['Class / Degree',p.cls||p.degree],['Board',p.board],['Stream',p.stream],['Subjects',(p.subjects||[]).join(', ')],
+  ['Goal',p.goalText],['Competitive Exam',p.competitiveExam],['Daily Study',p.time],
+  ['Current Level',p.level],['Strong Subjects',p.strong],['Weak Subjects / Topics',p.weak],['Missing Past Work',p.pastWork]
  ].filter(x=>x[1]).map(x=>'<div class="nx-profile-row"><span>'+nxEsc(x[0])+'</span><b>'+nxEsc(x[1])+'</b></div>').join('');
  nxHistory();
  const store=nxPlannerData(),done=Object.values(store).filter(Boolean).length,pct=Math.min(100,Math.round(done/63*100));
  document.getElementById('nxPct').textContent=pct+'%';document.getElementById('nxTaskCount').textContent=done;
- const notes=localStorage.getItem('nexora_notes_'+(currentUser?.email||'x'));document.getElementById('nxNotes').value=notes||'';
+ nxBuildTimetable(false);nxRenderDoubts();nxRenderNotes();
 }
 function nxTodayTasks(p){
- const subs=(p.subjects||[]).filter(x=>x&&x!=='Other'),weak=(p.weak||'').toLowerCase(),items=[];
- if(!subs.length)return '<p class="nx-sub">No subjects saved yet. Edit your profile and choose subjects.</p>';
- const m=plannerMinutes(p.time),weights=subs.map(x=>plannerWeak(x,p)?1.5:1),sum=weights.reduce((a,b)=>a+b,0);
- if(new Date().getDay()===0)items.push({id:'weekly-review',title:'Weekly review',meta:'Review your notes, mistakes and unfinished work.'});
- subs.forEach((sub,i)=>items.push({id:'nx-'+i,title:(plannerWeak(sub,p)?'Focus: ':'Study: ')+sub,meta:Math.max(10,Math.round(m*weights[i]/sum))+' min • concepts + practice'}));
- if(items.length<4)items.push({id:'revision',title:'Quick revision',meta:'10–15 min • formulas, definitions or key notes'});
+ const subs=(p.subjects||[]).filter(Boolean),weak=(p.weak||'').toLowerCase(),items=[];
+ if(!subs.length)return '<div class="nx-empty">No subjects saved yet.</div>';
+ const total=plannerMinutes(p.time);
+ subs.forEach((sub,i)=>{
+  const isWeak=weak&&weak.split(',').some(w=>w.trim()&&sub.toLowerCase().includes(w.trim()));
+  const mins=Math.max(10,Math.round(total*(isWeak?1.5:1)/subs.reduce((s,x)=>s+((weak&&weak.includes(x.toLowerCase()))?1.5:1),0)));
+  items.push({id:'today-'+i,title:(isWeak?'Focus: ':'Study: ')+sub,meta:(isWeak?'Extra practice • ':'Concepts + practice • ')+mins+' min'});
+ });
  return items.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="nxTask(this,\''+x.id+'\')"><span><span class="task-title">'+nxEsc(x.title)+'</span><div class="task-meta">'+nxEsc(x.meta)+'</div></span></label>').join('');
 }
 function nxTask(cb,id){
- const key='nexora_tasks_'+(currentUser?.email||'x'),d=JSON.parse(localStorage.getItem(key)||'{}');d[id]=cb.checked;localStorage.setItem(key,JSON.stringify(d));nxRender();
-}
-function nxTimetable(p){
- const subs=(p.subjects||[]).filter(x=>x&&x!=='Other');if(!subs.length)return '<div class="nx-sub">Select subjects first.</div>';
- const m=plannerMinutes(p.time), slots=[];
- let remaining=m;
- const weak=subs.filter(x=>plannerWeak(x,p));
- const focus=weak[0]||subs[0];
- const warm=Math.min(10,Math.max(5,Math.round(m*.08)));remaining-=warm;
- slots.push(['Start','Warm-up + plan',warm+' min']);
- const usable=Math.max(15,remaining);
- const base=Math.max(15,Math.floor(usable/subs.length));
- subs.forEach((sub,i)=>slots.push(['Session '+(i+1),sub,Math.max(15,base+(plannerWeak(sub,p)?10:0))+' min • learn + practice']));
- slots.push(['Finish','Revision + mistakes',Math.max(10,Math.min(20,Math.round(m*.1)))+' min']);
- return slots.map(x=>'<div class="nx-time-row"><div class="nx-time">'+nxEsc(x[0])+'</div><div class="nx-time-card"><b>'+nxEsc(x[1])+'</b><small>'+nxEsc(x[2])+(x[1]===focus?' • extra focus':'')+'</small></div></div>').join('');
+ const key=nxKey('nexora_tasks'),d=JSON.parse(localStorage.getItem(key)||'{}');d[id]=cb.checked;localStorage.setItem(key,JSON.stringify(d));nxRender();
 }
 function nxRoadmap(p){
- const exam=p.competitiveExam?' for '+nxEsc(p.competitiveExam):'';
+ const comp=p.competitiveExam?' for '+nxEsc(p.competitiveExam):'';
  return [
- ['1','Foundation','Days 1–7: build the routine, cover core topics'+exam+' and take Test 1.'],
- ['2','Practice','Days 8–14: increase questions and give extra time to weak subjects.'],
- ['3','Improve','Days 15–21: analyse mistakes, revise and take the final test.'],
- ['4','Next cycle','After Day 21: use unfinished work and mistakes to build the next cycle.']
+ ['1','Foundation','Build a consistent routine and cover core topics'+comp+'.'],
+ ['2','Practice','Solve questions daily and give extra time to weak subjects.'],
+ ['3','Test & Improve','Take progress tests, analyse mistakes and revise weak topics.'],
+ ['4','Goal Completion','Finish the current goal, review your progress and mark it complete.']
  ].map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="nx-sub" style="margin-top:4px">'+x[2]+'</div></div></div>').join('');
 }
 function nxHistory(){
- const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
- document.getElementById('nxGoalHistory').innerHTML=h.length?h.map(x=>'<div class="nx-history"><span>'+nxEsc(x.goal)+'</span><span class="nx-complete">✓ Completed</span></div>').join(''):'<div class="nx-sub">No completed goals yet.</div>';
+ const key=nxKey('nexora_goal_history'),h=JSON.parse(localStorage.getItem(key)||'[]');
+ document.getElementById('nxGoalHistory').innerHTML=h.length?h.map(x=>'<div class="nx-history"><span>'+nxEsc(x.goal)+'</span><span class="nx-complete">✓ Completed</span></div>').join(''):'<div class="nx-empty">No completed goals yet.</div>';
 }
-function nxEditProfile(){if(typeof openStudent==='function')openStudent();else alert('Profile editor is unavailable.')}
-function nxLogout(){if(typeof logout==='function')logout();else location.reload()}
-let nxTimerSeconds=25*60,nxTimerId=null;
-function nxTimerPaint(){const m=String(Math.floor(nxTimerSeconds/60)).padStart(2,'0'),s=String(nxTimerSeconds%60).padStart(2,'0');const el=document.getElementById('nxTimer');if(el)el.textContent=m+':'+s}
-function nxTimerStart(){if(nxTimerId)return;nxTimerId=setInterval(()=>{if(nxTimerSeconds>0){nxTimerSeconds--;nxTimerPaint()}else{clearInterval(nxTimerId);nxTimerId=null;alert('Focus session complete! Take a short break.')}},1000)}
-function nxTimerPause(){clearInterval(nxTimerId);nxTimerId=null}
-function nxTimerReset(){nxTimerPause();nxTimerSeconds=25*60;nxTimerPaint()}
-function nxSaveNotes(){localStorage.setItem('nexora_notes_'+(currentUser?.email||'x'),document.getElementById('nxNotes').value);alert('Notes saved.')}
 function nxCompleteGoal(){
  const p=nxProfile();if(!p)return;
- const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
+ const key=nxKey('nexora_goal_history'),h=JSON.parse(localStorage.getItem(key)||'[]');
  h.push({goal:p.goalText||'Goal',completedAt:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(h));
- alert('Goal completed! This ₹1499 One-Goal Premium cycle is now finished. You can set a new goal, but the new goal needs a new plan.');
+ p.goalDone=true;currentUser.studentProfile=p;
+ let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
+ alert('Goal completed! This ₹1499 One-Goal Premium cycle is finished. Edit your profile to start a new goal with a new plan.');
  nxRender();nxOpenProfile();
 }
-function nxEditProfile(){
- // Reuse the existing working Student Setup editor rather than creating a second form.
- if(typeof openStudent==='function'){openStudent();}else{alert('Profile editor is not available in this version.')}
+function nxEditProfile(){if(typeof openStudent==='function')openStudent();else alert('Profile editor is not available.')}
+function nxBuildTimetable(force){
+ const p=nxProfile(),box=document.getElementById('nxTimetableContent');if(!box)return;
+ if(!p){box.innerHTML='<div class="nx-empty">Create your profile first.</div>';return}
+ const subjects=(p.subjects||[]).filter(Boolean),total=plannerMinutes(p.time);
+ if(!subjects.length){box.innerHTML='<div class="nx-empty">No subjects selected.</div>';return}
+ const weak=(p.weak||'').toLowerCase().split(',').map(x=>x.trim()).filter(Boolean);
+ const days=['Today','Tomorrow','Day 3','Day 4','Day 5','Day 6','Day 7'];
+ const htmlDays=days.map((day,di)=>{
+   let dayItems=[];
+   if(di===6){dayItems.push('📝 Progress test + mistake review');}
+   subjects.forEach((s,i)=>{
+     const isWeak=weak.some(w=>w&&s.toLowerCase().includes(w));
+     const mins=Math.max(10,Math.round(total*(isWeak?1.5:1)/subjects.reduce((sum,ss)=>sum+(weak.some(w=>w&&ss.toLowerCase().includes(w))?1.5:1),0)));
+     dayItems.push((isWeak?'🎯 ':'📚 ')+s+' — '+mins+' min');
+   });
+   return '<div class="nx-day-card"><h4>'+day+'</h4>'+dayItems.map(x=>'<div class="task-row"><span>'+nxEsc(x)+'</span></div>').join('')+'</div>';
+ }).join('');
+ box.innerHTML=htmlDays;
 }
-function nxLogout(){
- if(typeof logout==='function'){logout();return}
- if(typeof currentUser!=='undefined'){currentUser=null;localStorage.removeItem('currentUser');location.reload();}
+let nxTimerSeconds=25*60,nxTimerInitial=25*60,nxTimerInterval=null;
+function nxFormatTime(s){let m=Math.floor(s/60),sec=s%60;return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')}
+function nxUpdateTimer(){const e=document.getElementById('nxTimerDisplay');if(e)e.textContent=nxFormatTime(nxTimerSeconds)}
+function nxSetTimer(min){min=Math.max(5,Math.min(180,Number(min)||25));nxPauseTimer();nxTimerInitial=min*60;nxTimerSeconds=nxTimerInitial;nxUpdateTimer()}
+function nxSetCustomTimer(){const n=Number(document.getElementById('nxCustomMinutes').value);if(n<5||n>180){alert('Choose between 5 and 180 minutes.');return}nxSetTimer(n)}
+function nxStartTimer(){if(nxTimerInterval)return;nxTimerInterval=setInterval(()=>{if(nxTimerSeconds<=0){nxPauseTimer();alert('Focus session complete! 🎉');return}nxTimerSeconds--;nxUpdateTimer()},1000)}
+function nxPauseTimer(){if(nxTimerInterval){clearInterval(nxTimerInterval);nxTimerInterval=null}}
+function nxResetTimer(){nxPauseTimer();nxTimerSeconds=nxTimerInitial;nxUpdateTimer()}
+function nxSaveDoubt(){
+ const text=(document.getElementById('nxDoubtText').value||'').trim(),file=document.getElementById('nxDoubtPhoto').files[0];
+ if(!text&&!file){alert('Write a doubt or attach a question photo.');return}
+ const save=(photo)=>{const key=nxKey('nexora_doubts'),a=JSON.parse(localStorage.getItem(key)||'[]');a.unshift({text,photo:photo||'',at:new Date().toLocaleString()});localStorage.setItem(key,JSON.stringify(a));nxClearDoubt();nxRenderDoubts()}
+ if(file){const r=new FileReader();r.onload=()=>save(r.result);r.readAsDataURL(file)}else save('');
 }
-function nxOpenAfterLogin(){
- if(nxProfile()){nxShowApp();}
+function nxClearDoubt(){document.getElementById('nxDoubtText').value='';document.getElementById('nxDoubtPhoto').value='';const p=document.getElementById('nxDoubtPreview');p.src='';p.style.display='none'}
+function nxRenderDoubts(){
+ const box=document.getElementById('nxDoubtList');if(!box)return;
+ const a=JSON.parse(localStorage.getItem(nxKey('nexora_doubts'))||'[]');
+ box.innerHTML=a.length?a.slice(0,8).map((x,i)=>'<div class="nx-day-card"><b>Doubt '+(i+1)+'</b><div class="nx-sub">'+nxEsc(x.at)+'</div>'+(x.text?'<p>'+nxEsc(x.text)+'</p>':'')+(x.photo?'<img src="'+x.photo+'" class="nx-doubt-preview" style="display:block">':'')+'</div>').join(''):'<div class="nx-empty">No saved doubts yet.</div>';
 }
+function nxSaveStudyNote(){
+ const text=(document.getElementById('nxStudyNote').value||'').trim();if(!text){alert('Write a note first.');return}
+ const key=nxKey('nexora_notes'),a=JSON.parse(localStorage.getItem(key)||'[]');a.unshift({text,at:new Date().toLocaleString()});localStorage.setItem(key,JSON.stringify(a));document.getElementById('nxStudyNote').value='';nxRenderNotes()
+}
+function nxRenderNotes(){
+ const box=document.getElementById('nxNotesList');if(!box)return;
+ const a=JSON.parse(localStorage.getItem(nxKey('nexora_notes'))||'[]');
+ box.innerHTML=a.length?a.slice(0,10).map(x=>'<div class="nx-day-card"><div class="nx-sub">'+nxEsc(x.at)+'</div><div>'+nxEsc(x.text)+'</div></div>').join(''):'<div class="nx-empty">No notes yet.</div>';
+}
+function nxPreviewDoubtPhoto(){
+ const f=document.getElementById('nxDoubtPhoto')?.files[0],p=document.getElementById('nxDoubtPreview');if(!f||!p)return;
+ const r=new FileReader();r.onload=()=>{p.src=r.result;p.style.display='block'};r.readAsDataURL(f)
+}
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='nxDoubtPhoto')nxPreviewDoubtPhoto()})
+
+
+/* NEXORA V5 — Topic Question Generator */
+const nxQuestionBank = {
+  "newton's laws":[
+    {q:"A 5 kg block is acted on by a net force of 20 N. Find its acceleration.",a:"4 m/s²",e:"Use a = F/m."},
+    {q:"A body moves with constant velocity on a straight line. What is its net force?",a:"0 N",e:"Constant velocity means zero acceleration."},
+    {q:"Two forces of 10 N and 6 N act in opposite directions on a 2 kg body. Find acceleration.",a:"2 m/s²",e:"Net force = 10 − 6 = 4 N, then a = 4/2."}
+  ],
+  "kinematics":[
+    {q:"A car starts from rest with acceleration 2 m/s² for 5 s. Find its final velocity.",a:"10 m/s",e:"Use v = u + at."},
+    {q:"An object has u = 5 m/s, a = 2 m/s² and t = 4 s. Find displacement.",a:"36 m",e:"Use s = ut + ½at²."},
+    {q:"If a body has zero acceleration, what can you say about its velocity?",a:"Its velocity remains constant.",e:"Zero acceleration means velocity does not change."}
+  ],
+  "work energy power":[
+    {q:"A 10 N force moves an object 5 m in the same direction. Find work done.",a:"50 J",e:"W = Fd."},
+    {q:"A body has mass 2 kg and speed 3 m/s. Find kinetic energy.",a:"9 J",e:"KE = ½mv²."},
+    {q:"A machine does 600 J of work in 20 s. Find power.",a:"30 W",e:"P = W/t."}
+  ],
+  "quadratic equations":[
+    {q:"Solve x² − 5x + 6 = 0.",a:"x = 2, 3",e:"Factor as (x−2)(x−3)."},
+    {q:"For x² + 4x + 4 = 0, find the nature of roots.",a:"Equal real roots",e:"Discriminant b²−4ac = 0."},
+    {q:"If the roots of x² − 7x + 10 = 0 are α and β, find α+β.",a:"7",e:"Sum of roots = −b/a."}
+  ],
+  "trigonometry":[
+    {q:"Find sin 30°.",a:"1/2",e:"Standard trigonometric value."},
+    {q:"If tan θ = 1 and θ is acute, find θ.",a:"45°",e:"tan 45° = 1."},
+    {q:"Simplify sin²θ + cos²θ.",a:"1",e:"This is the fundamental identity."}
+  ],
+  "chemical bonding":[
+    {q:"What type of bond is generally formed by transfer of electrons between atoms?",a:"Ionic bond",e:"Electron transfer produces oppositely charged ions."},
+    {q:"Which bond involves sharing of electron pairs?",a:"Covalent bond",e:"Covalent bonds involve shared electrons."},
+    {q:"What is the usual valency of oxygen in simple compounds?",a:"2",e:"Oxygen generally needs two electrons to complete its valence shell."}
+  ],
+  "mole concept":[
+    {q:"How many particles are present in 1 mole of a substance?",a:"6.022 × 10²³",e:"Avogadro constant."},
+    {q:"Find moles in 18 g of water (H₂O = 18 g/mol).",a:"1 mol",e:"n = mass/molar mass."},
+    {q:"What is the molar mass of CO₂?",a:"44 g/mol",e:"12 + 2×16."}
+  ],
+  "cell":[
+    {q:"Which organelle is commonly called the powerhouse of the cell?",a:"Mitochondria",e:"It is a major site of cellular respiration."},
+    {q:"Which structure controls many activities of a eukaryotic cell?",a:"Nucleus",e:"The nucleus contains genetic material."},
+    {q:"What is the basic structural and functional unit of life?",a:"Cell",e:"All living organisms are made of cells."}
+  ]
+};
+
+function nxNormTopic(s){
+  return (s||"").toLowerCase().replace(/[’']/g,"'").replace(/\s+/g," ").trim();
+}
+function nxTopicKey(topic){
+  const t=nxNormTopic(topic);
+  const keys=Object.keys(nxQuestionBank);
+  return keys.find(k=>t.includes(k)||k.includes(t))||null;
+}
+function nxGenericQuestions(subject,topic,count,level){
+  const clean=topic.trim();
+  const templates=[
+    `Define ${clean} and write one important formula, law, or property related to it.`,
+    `Explain the main idea of ${clean} in 2–3 lines and give one example.`,
+    `A student is revising ${clean}. What are two common mistakes the student should avoid?`,
+    `Create a short numerical/problem-solving question based on ${clean} and state the steps needed to solve it.`,
+    `Compare two closely related concepts within ${clean}. What is the key difference?`,
+    `Write one real-life application of ${clean} and explain why it works.`,
+    `What prerequisite concept is most important before studying ${clean}? Explain briefly.`,
+    `Make a one-line revision question for ${clean} and answer it in one sentence.`,
+    `What graph/diagram would best represent ${clean}, if applicable? Describe its important feature.`,
+    `Write a test-style question on ${clean} suitable for ${subject} ${level}.`
+  ];
+  return templates.slice(0,Math.min(count,templates.length)).map((q,i)=>({
+    q:q,a:"Use your textbook/class notes to verify the answer.",e:"This is a generated practice prompt, not a verified previous-year question."
+  }));
+}
+function nxGenerateQuestions(){
+  const subject=document.getElementById('nxQSubject')?.value||'Other';
+  const topic=(document.getElementById('nxQTopic')?.value||'').trim();
+  const level=document.getElementById('nxQLevel')?.value||'JEE/Exam Level';
+  const count=Number(document.getElementById('nxQCount')?.value||10);
+  const list=document.getElementById('nxQuestionList');
+  const status=document.getElementById('nxQuestionStatus');
+  if(!topic){alert("Pehle topic likho. Example: Newton's Laws");return}
+  const key=nxTopicKey(topic);
+  let qs;
+  if(key){
+    qs=nxQuestionBank[key].map(x=>({...x})).sort(()=>Math.random()-0.5);
+    while(qs.length<count) qs.push(...nxQuestionBank[key].map(x=>({...x})));
+    qs=qs.slice(0,count);
+    status.textContent=`${qs.length} practice questions generated for "${topic}".`;
+  }else{
+    qs=nxGenericQuestions(subject,topic,count,level);
+    status.textContent=`${qs.length} topic-based practice prompts generated for "${topic}". For verified PYQs, use a question source/PYQ dataset; this static site does not invent PYQ claims.`;
+  }
+  localStorage.setItem(nxKey('nexora_last_questions'),JSON.stringify({subject,topic,level,qs,at:new Date().toISOString()}));
+  nxRenderQuestions(qs);
+}
+function nxRenderQuestions(qs){
+  const box=document.getElementById('nxQuestionList'),practice=document.getElementById('nxQuestionPractice');
+  if(!box)return;
+  box.innerHTML=(qs||[]).map((x,i)=>`
+    <div class="nx-question">
+      <div class="nx-q-meta">Question ${i+1}</div>
+      <h4>${nxEsc(x.q)}</h4>
+      <div class="nx-q-actions">
+        <button class="nx-secondary" onclick="nxToggleAnswer(${i})">Show answer</button>
+      </div>
+      <div id="nxAns${i}" class="nx-note" style="display:none"><b>Answer:</b> ${nxEsc(x.a)}<br><span>${nxEsc(x.e||'')}</span></div>
+    </div>`).join('');
+  practice.innerHTML=qs?.length?`
+    <div class="nx-sub">Select a question to write your own solution.</div>
+    <select id="nxPracticeSelect" class="nx-input" style="margin-top:10px">
+      ${qs.map((x,i)=>`<option value="${i}">Question ${i+1}</option>`).join('')}
+    </select>
+    <textarea id="nxPracticeAnswer" class="nx-textarea" style="margin-top:10px" placeholder="Write your solution/answer here..."></textarea>
+    <button class="nx-primary" style="margin-top:10px" onclick="nxSaveQuestionAttempt()">💾 Save Attempt</button>
+    <div id="nxAttemptStatus" class="nx-sub" style="margin-top:8px"></div>`:'';
+  window.nxCurrentQuestions=qs||[];
+}
+function nxToggleAnswer(i){
+  const e=document.getElementById('nxAns'+i);if(e)e.style.display=e.style.display==='none'?'block':'none';
+}
+function nxSaveQuestionAttempt(){
+  const sel=document.getElementById('nxPracticeSelect'),ans=document.getElementById('nxPracticeAnswer');
+  const st=document.getElementById('nxAttemptStatus');
+  if(!sel||!ans||!ans.value.trim()){alert('Apna answer pehle likho.');return}
+  const key=nxKey('nexora_question_attempts'),a=JSON.parse(localStorage.getItem(key)||'[]');
+  a.unshift({question:window.nxCurrentQuestions?.[Number(sel.value)]?.q||'',answer:ans.value.trim(),at:new Date().toLocaleString()});
+  localStorage.setItem(key,JSON.stringify(a.slice(0,30)));
+  ans.value='';st.textContent='Attempt saved in this device.';
+}
+function nxLoadSavedQuestions(){
+  const x=JSON.parse(localStorage.getItem(nxKey('nexora_last_questions'))||'null');
+  if(!x){alert('No previous question set found.');return}
+  document.getElementById('nxQSubject').value=x.subject||'Other';
+  document.getElementById('nxQTopic').value=x.topic||'';
+  document.getElementById('nxQLevel').value=x.level||'JEE/Exam Level';
+  document.getElementById('nxQuestionStatus').textContent=`Restored last set: ${x.topic}`;
+  nxRenderQuestions(x.qs||[]);
+}
+
 </script>
 </body>
 </html>
