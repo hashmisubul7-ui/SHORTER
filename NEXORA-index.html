@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXORA — Your Goal. Your Next Step.</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#17171c;background:#fff}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+nav{height:68px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;background:#fffffff2;backdrop-filter:blur(12px);z-index:5}
+.logo{font-size:22px;font-weight:800}.logo span{color:#635bdb}nav div{display:flex;gap:22px;color:#666;font-size:14px}nav a{text-decoration:none;color:inherit}
+.btn{padding:11px 17px;border-radius:11px;font-weight:700}.primary{background:#635bdb;color:white}.light{background:#f2f2f5;color:#222}
+.hero{text-align:center;padding:78px 7%;background:linear-gradient(#fff,#faf9ff)}.home-choices{max-width:900px;margin:32px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}.choice-card{background:#fff;border:1px solid #e2e2e8;border-radius:22px;padding:25px;box-shadow:0 16px 45px #2221}.choice-card h2{margin:10px 0 6px}.choice-card p{color:#666;min-height:44px}.choice-card button{width:100%;margin-top:10px;position:relative;z-index:3;pointer-events:auto}.choice-icon{font-size:30px}@media(max-width:650px){.home-choices{grid-template-columns:1fr}}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#635bdb}
+h1{font-size:clamp(48px,8vw,84px);line-height:.95;letter-spacing:-5px;margin:16px 0}h1 span{color:#635bdb}
+.hero p{max-width:650px;margin:0 auto 28px;color:#666;font-size:18px}.tabs{display:flex;justify-content:center;gap:7px;margin:20px}.tab{padding:9px 14px;border-radius:10px;background:#eeeef3}.tab.active{background:#17171c;color:#fff}
+.box{max-width:850px;margin:auto;background:#fff;border:1px solid #dddde5;border-radius:18px;padding:14px;text-align:left;box-shadow:0 18px 50px #2221}
+textarea{width:100%;min-height:210px;border:0;outline:0;resize:vertical;padding:12px;font-size:15px}.bottom{border-top:1px solid #eee;padding-top:10px;display:flex;justify-content:space-between;gap:10px}.actions{display:flex;gap:8px}
+select{padding:8px;border:1px solid #ddd;border-radius:9px;background:#fff}.result{display:none;border-top:1px solid #eee;margin-top:15px;padding-top:15px}.result.show{display:block}.summary{white-space:pre-wrap;line-height:1.7}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#f0effa;color:#635bdb;font-size:11px;font-weight:700}
+section{padding:70px 7%}.head{margin-bottom:25px}.head h2{font-size:32px;margin:6px 0}.muted{color:#777}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid #e8e8ee;border-radius:18px;padding:22px}.pricing{background:#faf9ff}.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.plan{background:white;border:1px solid #e2e2e8;border-radius:20px;padding:23px}.plan.featured{border:2px solid #635bdb}.plan strong{display:block;font-size:40px;margin:8px 0}.plan small{display:block;color:#777;margin-bottom:18px}
+footer{padding:45px 7%;border-top:1px solid #eee;color:#777}.modal{display:none;position:fixed;inset:0;background:#1118;place-items:start center;padding:10px;z-index:100;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y}.modal.show{display:grid}.modalbox{background:#fff;padding:25px;border-radius:20px;max-width:420px;width:100%;max-height:calc(100dvh - 20px);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;box-sizing:border-box;margin:auto 0}
+@media(max-width:800px){nav div{display:none}.cards{grid-template-columns:1fr}.plans{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.modal{padding:8px;align-items:start}.modalbox{max-height:calc(100vh - 16px);padding:20px}nav{padding:0 18px}.hero,section{padding-left:20px;padding-right:20px}.plans{grid-template-columns:1fr}.bottom{flex-direction:column}.actions button{flex:1}}
+.dashboard{display:none;min-height:70vh;padding:70px 7%;background:#faf9ff}.dashboard.show{display:block}.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;max-width:1000px}.dash-card{background:#fff;border:1px solid #e4e4eb;border-radius:18px;padding:24px}.dash-card strong{display:block;font-size:28px;margin:8px 0}.userbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px}.auth-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:7px 0 12px}.auth-msg{font-size:13px;color:#777;min-height:20px}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}
+.home-choices{max-width:900px;margin:30px auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left}.choice-card{background:#fff;border:1px solid #e2e2e8;border-radius:22px;padding:25px;box-shadow:0 16px 45px #2221}.choice-card h2{margin:10px 0 6px}.choice-card p{color:#666;min-height:45px}.choice-card button{width:100%;margin-top:10px;position:relative;z-index:3;pointer-events:auto}.choice-icon{font-size:30px}.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.student-grid>div{display:flex;flex-direction:column;gap:6px}.student-grid .full{grid-column:1/-1}.student-grid label{font-size:12px;font-weight:800}.student-types{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}.type-btn{padding:11px;border-radius:10px;background:#f1f1f5}.type-btn.active{background:#635bdb;color:white}.subject-list{display:grid!important;grid-template-columns:repeat(3,1fr);gap:7px}.subject-list label{font-weight:500!important;border:1px solid #ddd;padding:9px;border-radius:9px}.subject-list input{width:auto}@media(max-width:650px){.home-choices,.student-grid{grid-template-columns:1fr}.student-grid .full{grid-column:auto}.subject-list{grid-template-columns:1fr 1fr!important}}
+.study-planner{margin-top:18px}.planner-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.plan-mini{border:1px solid #e9e9ef;border-radius:16px;padding:15px}.task-row{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid #eee}
+.task-row:first-child{border-top:0}.task-row.done .task-title{text-decoration:line-through;opacity:.55}.task-title{font-weight:700}.task-meta{font-size:12px;color:#777;margin-top:3px}
+.progress-bar{height:10px;background:#eeeef4;border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:#635bdb;border-radius:99px}
+.roadmap-list{display:grid;gap:10px;margin-top:12px}.roadmap-step{display:flex;gap:12px;padding:13px;border:1px solid #e9e9ef;border-radius:14px}
+.roadmap-num{min-width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#eeeefe;color:#5149c8;font-weight:800}
+.focus-note{margin:12px 0;padding:12px 14px;border-radius:13px;background:#f8f7ff}
+@media(max-width:760px){.planner-grid{grid-template-columns:1fr}}
+
+/* NEXORA app-style redesign */
+:root{--nx-bg:#f6f7fb;--nx-card:#fff;--nx-text:#171827;--nx-muted:#777b8c;--nx-accent:#5b55e8;--nx-border:#e8e9f1}
+body{background:var(--nx-bg)!important;color:var(--nx-text)!important}
+header{position:sticky!important;top:0!important;z-index:50!important;background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--nx-border)!important;backdrop-filter:blur(12px)}
+header .container{max-width:1100px!important}
+.nx-brand{font-weight:900;font-size:22px;letter-spacing:-.6px;color:var(--nx-text)}
+.nx-brand span{color:var(--nx-accent)}
+.nx-top-actions{display:flex;gap:8px;align-items:center}
+.nx-icon-btn{border:1px solid var(--nx-border);background:#fff;border-radius:12px;padding:9px 11px;font-weight:800;cursor:pointer}
+.nx-app-shell{max-width:1100px;margin:0 auto;padding:22px 16px 100px}
+.nx-welcome{display:flex;justify-content:space-between;gap:18px;align-items:center;margin:8px 0 18px}
+.nx-welcome h1{font-size:28px;margin:0 0 5px;letter-spacing:-.7px}
+.nx-sub{color:var(--nx-muted);font-size:14px}
+.nx-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:14px}
+.nx-card{background:var(--nx-card);border:1px solid var(--nx-border);border-radius:20px;padding:18px;box-shadow:0 5px 22px rgba(30,30,60,.04)}
+.nx-card h3{margin:0 0 12px}
+.nx-goal{background:linear-gradient(135deg,#5b55e8,#7974f4);color:#fff;border:0}
+.nx-goal .nx-sub{color:rgba(255,255,255,.78)}
+.nx-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.nx-stat{background:#f8f8fc;border:1px solid var(--nx-border);border-radius:15px;padding:13px}
+.nx-stat b{display:block;font-size:20px}.nx-stat span{font-size:12px;color:var(--nx-muted)}
+.nx-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.nx-primary{background:var(--nx-accent)!important;color:#fff!important;border:0!important;border-radius:12px!important;padding:10px 14px!important;font-weight:800!important}
+.nx-secondary{background:#fff!important;border:1px solid var(--nx-border)!important;border-radius:12px!important;padding:10px 14px!important;font-weight:800!important}
+.nx-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:60;background:#fff;border:1px solid var(--nx-border);border-radius:18px;padding:7px;display:flex;gap:4px;box-shadow:0 10px 35px rgba(25,25,50,.12)}
+.nx-nav button{border:0;background:transparent;padding:9px 14px;border-radius:12px;font-weight:800;color:#777;cursor:pointer}
+.nx-nav button.active{background:#eeeefe;color:var(--nx-accent)}
+.nx-page{display:none}.nx-page.active{display:block}
+.nx-profile-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #eee}
+.nx-profile-row:last-child{border-bottom:0}.nx-profile-row span{color:var(--nx-muted);font-size:13px}.nx-profile-row b{text-align:right}
+.nx-goal-history{display:grid;gap:9px}.nx-history{border:1px solid var(--nx-border);border-radius:14px;padding:12px;display:flex;justify-content:space-between}
+.nx-complete{color:#16834a;font-weight:800}
+.nx-modal-panel{max-width:560px!important;border-radius:22px!important}
+@media(max-width:780px){.nx-grid{grid-template-columns:1fr}.nx-welcome{align-items:flex-start}.nx-stat-grid{grid-template-columns:1fr 1fr 1fr}.nx-nav{width:calc(100% - 20px);justify-content:space-around}.nx-nav button{padding:9px 8px;font-size:12px}}
+
+
+/* Logged-in app mode: hide the old long dashboard behind the new shell */
+body.nx-logged-in #dashboard{display:none!important}
+body.nx-logged-in #hero,
+body.nx-logged-in #features,
+body.nx-logged-in #pricing,
+body.nx-logged-in #dailyNews,
+body.nx-logged-in #wallpapers,
+body.nx-logged-in #about,
+body.nx-logged-in #contact{display:none!important}
+body.nx-logged-in .nx-app-shell{min-height:calc(100vh - 80px)}
+</style>
+</head>
+<body>
+<nav>
+<a class="logo" href="#">SH<span>O</span>RTER</a>
+<div><a href="#summarize">Summarize</a><a href="#features">Features</a><a href="#pricing">Pro</a></div>
+<button class="btn light" onclick="currentUser?showDashboard():openAuth()" id="authBtn">Sign in</button>
+</nav>
+
+<div class="hero" id="home">
+<span class="eyebrow">UNDERSTAND • STUDY • ACHIEVE</span>
+<h1>What do you want to<br><span>do with NEXORA?</span></h1>
+<p>Choose your experience. Summarize information or build a personalized study journey.</p>
+<div class="home-choices">
+<div class="choice-card"><div class="choice-icon">🧠</div><h2>Summarize</h2><p>Turn long articles and text into short, readable key points.</p><button class="btn primary" onclick="document.getElementById('summarize').scrollIntoView({behavior:'smooth'})">Start Summarizing →</button></div>
+<div class="choice-card"><div class="choice-icon">🎓</div><h2>Student</h2><p>Create your goal, timetable, daily missions and progress plan.</p><button class="btn light" onclick="openStudent()">Set Up My Study Plan →</button></div>
+</div>
+</div>
+
+<div class="hero" id="summarize" style="padding-top:35px">
+<span class="eyebrow">SUMMARIZER</span>
+<h2 style="font-size:38px;margin:10px 0">Make long things <span>NEXORA.</span></h2>
+<div class="tabs"><button class="tab active" onclick="mode(this,'text')">Paste text</button><button class="tab" onclick="mode(this,'url')">Article link</button></div>
+<div class="box">
+<textarea id="input" placeholder="Paste a long article here..."></textarea>
+<div class="bottom">
+<label>Length: <select id="length"><option value="short">Very short</option><option value="medium" selected>Balanced</option><option value="long">Detailed</option></select></label>
+<div class="actions"><button class="btn light" onclick="clearText()">Clear</button><button class="btn primary" onclick="summarize()">Make it shorter →</button></div>
+</div>
+<div class="result" id="result"><span class="tag">SUMMARY</span><h3>Main things</h3><div class="summary" id="summary"></div><button class="btn light" onclick="copySummary()">Copy</button></div>
+</div>
+</div>
+
+<section id="features"><div class="head"><span class="eyebrow">SIMPLE BY DESIGN</span><h2>Everything important. Nothing extra.</h2></div>
+<div class="cards"><div class="card"><span class="tag">01</span><h3>Choose your length</h3><p class="muted">Very short, balanced or detailed.</p></div><div class="card"><span class="tag">02</span><h3>Focus on the main things</h3><p class="muted">Extracts key sentences and removes filler.</p></div><div class="card"><span class="tag">03</span><h3>Fast & clean</h3><p class="muted">Designed for mobile and desktop.</p></div></div></section>
+
+<section class="pricing" id="pricing"><div class="head"><span class="eyebrow">NEXORA PRO</span><h2>More reading power.</h2><p class="muted">Free accounts get 3 summaries per day. Pro can unlock higher limits and extra features.</p></div>
+<div class="plans">
+<div class="plan"><b>1 MONTH</b><strong>₹49</strong><small>per month</small><button class="btn light" onclick="show('NEXORA Pro','You selected ₹39/month. Connect payments before accepting real payments.')">Choose</button></div>
+<div class="plan"><b>3 MONTHS</b><strong>₹139</strong><small>₹46.33/month</small><button class="btn light" onclick="show('NEXORA Pro','You selected ₹99/3 months.')">Choose</button></div>
+<div class="plan featured"><b>6 MONTHS ⭐</b><strong>₹259</strong><small>₹43.17/month</small><button class="btn primary" onclick="show('NEXORA Pro','You selected ₹189/6 months.')">Choose</button></div>
+<div class="plan"><b>1 YEAR</b><strong>₹499</strong><small>₹41.58/month</small><button class="btn light" onclick="show('NEXORA Pro','You selected ₹359/year.')">Choose</button></div>
+</div></section>
+
+<div class="dashboard" id="dashboard"><div class="userbar"><div><span class="eyebrow">YOUR ACCOUNT</span><h2 id="welcomeName">Welcome back!</h2><p class="muted" id="accountEmail"></p></div><button class="btn light" onclick="logout()">Log out</button></div><div class="dashboard-grid"><div class="dash-card"><span class="tag">STUDENT</span><strong id="studentStatus">Not set</strong><span class="muted">Your personalized study profile</span><button class="btn primary" style="margin-top:15px" onclick="openStudent()">Student Setup</button></div><div class="dash-card"><span class="tag">SUMMARIES</span><strong id="summaryCount">0</strong><span class="muted">Summaries used this session</span></div><div class="dash-card"><span class="tag">PLAN</span><strong id="planName">Free</strong><span class="muted">Your current NEXORA plan</span></div><div class="dash-card"><span class="tag">PRO</span><strong>₹39+</strong><span class="muted">Choose a Pro plan below</span><button class="btn primary" style="margin-top:15px" onclick="scrollToPricing()">View Pro plans</button></div></div><div id="studentPlanPreview" class="dash-card" style="margin-top:18px;display:none"><span class="tag">STUDY PROFILE</span><h3 id="studentPlanTitle" style="margin:10px 0 6px">Your Study Profile</h3><p class="muted" id="studentPlanDetails"></p><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="openStudent()">Edit Profile</button></div></div>
+<div id="studentPlanner" class="dash-card study-planner" style="display:none">
+<span class="tag">PERSONALIZED STUDY PLANNER</span>
+<h3 style="margin:10px 0 5px">Your timetable & goal roadmap</h3>
+<p class="muted" id="plannerGoalLine"></p>
+<div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin:12px 0 6px"><span>21-day progress</span><span id="plannerProgressText">0%</span></div>
+<div class="progress-bar"><div class="progress-fill" id="plannerProgressFill"></div></div>
+<div class="focus-note" id="plannerFocusNote"></div>
+<div class="planner-grid">
+<div class="plan-mini"><span class="tag">TODAY</span><h4>Today's tasks</h4><div id="todayTasks"></div></div>
+<div class="plan-mini"><span class="tag">7-DAY MISSION</span><h4>This week</h4><div id="weekTasks"></div></div>
+<div class="plan-mini"><span class="tag">TEST PLAN</span><h4>21-day tests</h4><div id="testPlan"></div></div>
+</div>
+<div style="margin-top:18px"><span class="tag">GOAL ROADMAP</span><div class="roadmap-list" id="roadmapList"></div></div>
+</div>
+</div>
+
+<div id="nxApp" style="display:none">
+  <div class="nx-app-shell">
+    <div class="nx-welcome">
+      <div>
+        <h1 id="nxHello">Welcome back 👋</h1>
+        <div class="nx-sub" id="nxGoalSmall">Your next step starts today.</div>
+      </div>
+      <div class="nx-top-actions">
+        <button class="nx-icon-btn" onclick="nxOpenProfile()">👤 Profile</button>
+        <button class="nx-icon-btn" onclick="nxOpenSettings()">⚙️</button>
+      </div>
+    </div>
+
+    <section id="nxHome" class="nx-page active">
+      <div class="nx-grid">
+        <div class="nx-card nx-goal">
+          <div style="font-size:12px;font-weight:800;opacity:.8">ACTIVE GOAL</div>
+          <h2 id="nxGoal" style="margin:7px 0"></h2>
+          <div class="nx-sub" id="nxGoalMeta"></div>
+          <div class="nx-actions">
+            <button class="nx-primary" onclick="nxGo('today')">View Today's Tasks</button>
+            <button class="nx-secondary" onclick="nxGo('roadmap')">View Roadmap</button>
+          </div>
+        </div>
+        <div class="nx-card">
+          <h3>Progress</h3>
+          <div class="nx-stat-grid">
+            <div class="nx-stat"><b id="nxPct">0%</b><span>21-day progress</span></div>
+            <div class="nx-stat"><b id="nxTaskCount">0</b><span>tasks done</span></div>
+            <div class="nx-stat"><b id="nxFocus">—</b><span>focus</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nx-card" style="margin-top:14px">
+        <h3>Quick access</h3>
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxGo('today')">✅ Today</button>
+          <button class="nx-secondary" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
+          <button class="nx-secondary" onclick="nxOpenProfile()">👤 My Profile</button>
+          <button class="nx-secondary" onclick="nxOpenSettings()">⚙️ Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="nxToday" class="nx-page">
+      <div class="nx-card">
+        <h3>Today's Tasks</h3>
+        <div id="nxTodayTasks"></div>
+      </div>
+    </section>
+
+    <section id="nxRoadmap" class="nx-page">
+      <div class="nx-card">
+        <h3>Goal Roadmap</h3>
+        <div id="nxRoadmapContent"></div>
+        <div class="nx-actions">
+          <button class="nx-primary" onclick="nxCompleteGoal()">🎯 Mark Goal Completed</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="nxProfile" class="nx-page">
+      <div class="nx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <h3>My Profile</h3><button class="nx-secondary" onclick="nxEditProfile()">Edit Profile & Goal</button>
+        </div>
+        <div id="nxProfileDetails"></div>
+        <h3 style="margin-top:20px">Goal History</h3>
+        <div id="nxGoalHistory" class="nx-goal-history"></div>
+      </div>
+    </section>
+
+    <section id="nxSettings" class="nx-page">
+      <div class="nx-card">
+        <h3>Settings</h3>
+        <div class="nx-profile-row"><span>Account</span><b id="nxAccount"></b></div>
+        <div class="nx-profile-row"><span>Plan</span><b id="nxPlan">Free</b></div>
+        <div class="nx-actions"><button class="nx-secondary" onclick="nxLogout()">Log out</button></div>
+      </div>
+    </section>
+  </div>
+
+  <nav class="nx-nav">
+    <button id="nxNavHome" class="active" onclick="nxGo('home')">🏠 Home</button>
+    <button id="nxNavToday" onclick="nxGo('today')">✅ Today</button>
+    <button id="nxNavRoadmap" onclick="nxGo('roadmap')">🗺️ Roadmap</button>
+    <button id="nxNavProfile" onclick="nxOpenProfile()">👤 Profile</button>
+  </nav>
+</div>
+
+<footer><b>NEXORA</b> — Read Less. Know More.<p>This is a front-end prototype. Real AI summarization, accounts, payments and article extraction require backend services.</p></footer>
+
+
+<div class="modal" id="studentModal"><div class="modalbox">
+<h2>🎓 Student Setup</h2><p class="muted">Tell NEXORA about yourself so it can build the right study plan.</p>
+<div class="student-grid">
+<div><label>Study type</label><div class="student-types"><button id="schoolBtn" class="type-btn active" onclick="setStudyType('school')">🏫 School</button><button id="collegeBtn" class="type-btn" onclick="setStudyType('college')">🎓 College</button></div></div>
+<div id="boardWrap" class="full"><label>Board</label><select id="boardSelect" onchange="boardChanged()">
+<option value="">Select board</option>
+<option>CBSE</option><option>ICSE</option><option>ISC</option><option>MP Board</option>
+<option>UP Board</option><option>RBSE</option><option>BSEB</option><option>WBCHSE</option>
+<option>Maharashtra State Board</option><option>Karnataka State Board</option><option>Kerala State Board</option>
+<option>Tamil Nadu State Board</option><option>Andhra Pradesh State Board</option><option>Telangana State Board</option>
+<option>Gujarat State Board</option><option>Other</option>
+</select></div>
+<div id="otherBoardWrap" class="full" style="display:none"><label>Your board</label><input id="otherBoard" placeholder="Write your board in your own words"></div>
+<div id="classWrap"><label>Class</label><select id="studentClass" onchange="updateClassFields()"><option value="">Select class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select></div>
+<div id="streamWrap" style="display:none"><label>Stream</label><select id="streamSelect" onchange="streamChanged()">
+<option value="">Select stream</option>
+<option value="maths">Maths</option>
+<option value="bio">Biology</option>
+<option value="commerce">Commerce</option>
+<option value="other">Other</option>
+</select></div>
+<div id="otherStreamWrap" class="full" style="display:none"><label>Your stream</label><input id="otherStream" placeholder="Write your stream in your own words"></div>
+<div id="collegeWrap" style="display:none"><label>Degree</label><input id="degree" placeholder="e.g. B.Tech"></div>
+<div id="branchWrap" style="display:none"><label>Branch / field</label><input id="branch" placeholder="e.g. Computer Science"></div>
+<div id="yearWrap" style="display:none"><label>Year / semester</label><input id="year" placeholder="e.g. 1st Year"></div>
+<div class="full"><label>Goal</label><select id="studentGoal" onchange="goalChanged()"><option value="">Select your goal</option><option value="top">🏆 Top my current class</option><option value="percent">🎯 Achieve a target percentage</option><option value="subject">📚 Become strong in a subject</option><option value="exam">📝 Prepare for my current exam</option><option value="competitive">🚀 Prepare for a competitive exam</option><option value="next">📈 Prepare for the next class</option><option value="future">🎓 Prepare for a future exam</option><option value="custom">✏️ Write my own goal</option></select></div>
+<div id="competitiveWrap" class="full" style="display:none"><label>Which competitive exam?</label><select id="competitiveExam" onchange="competitiveExamChanged()">
+<option value="">Select competitive exam</option><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option><option>CUET</option><option>CLAT</option><option>NDA</option><option>UPSC</option><option>SSC</option><option>CAT</option><option>GATE</option><option>Other</option></select></div>
+<div id="otherExamWrap" class="full" style="display:none"><label>Your competitive exam</label><input id="otherExam" placeholder="Write the exam name in your own words"></div>
+<div id="percentWrap" style="display:none"><label>Target percentage</label><input id="targetPercent" type="number" min="1" max="100" placeholder="e.g. 99"></div>
+<div id="customWrap" class="full" style="display:none"><label>Your custom goal</label><input id="customGoal" placeholder="Write your goal"></div>
+<div class="full"><label>Subjects</label><div id="subjectList" class="subject-list"></div><small>Subjects change automatically based on your class and, for Class 11–12, your stream.</small></div>
+<div><label>Daily study time</label><select id="studyTime"><option value="">Select time</option><option>30 minutes</option><option>1 hour</option><option>2 hours</option><option>3 hours</option><option>4+ hours</option></select></div>
+<div><label>Current level</label><select id="level"><option value="">Select level</option><option>Needs a lot of help</option><option>Needs improvement</option><option>Okay</option><option>Good</option><option>Very strong</option></select></div>
+<div class="full"><label>Strong subjects</label><input id="strongSubjects" placeholder="e.g. English, Maths"></div>
+<div class="full"><label>Weak subjects / topics</label><input id="weakSubjects" placeholder="e.g. Physics numericals, Algebra"></div>
+</div>
+<p id="studentError" class="auth-msg"></p>
+<div class="actions"><button class="btn light" onclick="closeStudent()">Cancel</button><button class="btn primary" onclick="createStudentProfile()">Create My Profile →</button></div>
+</div></div>
+<div class="modal" id="authModal"><div class="modalbox"><h2 id="authTitle">Sign in to NEXORA</h2><p class="muted">Create an account or sign in to continue.</p><input class="auth-input" id="authName" placeholder="Your name" style="display:none"><input class="auth-input" id="authEmail" type="email" placeholder="Email"><input class="auth-input" id="authPassword" type="password" placeholder="Password"><div class="actions"><button class="btn light" onclick="closeAuth()">Cancel</button><button class="btn primary" onclick="submitAuth()">Continue</button></div><p class="auth-msg" id="authMsg"></p><button id="authSwitch" class="btn light" style="width:100%;margin-top:8px" onclick="toggleAuthMode()">Create account</button></div></div>
+<div class="modal" id="modal"><div class="modalbox"><h2 id="mt"></h2><p id="mx"></p><button class="btn primary" onclick="closeProfileSuccess()">View My Study Plan</button></div></div>
+
+<script>
+let currentMode='text',used=Number(sessionStorage.getItem('shorterUsed')||0),authMode='login';
+let currentUser=JSON.parse(localStorage.getItem('shorterUser')||'null');
+function mode(b,m){currentMode=m;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('input').placeholder=m==='url'?'Paste an article URL here...':'Paste a long article here...'}
+function summarize(){let text=document.getElementById('input').value.trim();if(!text)return show('Nothing to summarize','Paste an article or text first.');if(used>=3&&!isPro())return show('Daily limit reached','Free accounts can use 3 summaries per day in this prototype.');if(currentMode==='url')return show('Article link mode','URL extraction needs a backend. Paste the article text for this demo.');used++;sessionStorage.setItem('shorterUsed',used);let s=text.replace(/\s+/g,' ').match(/[^.!?]+[.!?]+/g)||[text],v=document.getElementById('length').value,n=v==='short'?Math.max(1,Math.ceil(s.length*.2)):v==='medium'?Math.max(2,Math.ceil(s.length*.4)):Math.max(3,Math.ceil(s.length*.6));document.getElementById('summary').textContent=s.slice(0,n).map(x=>'• '+x.trim()).join('\n');document.getElementById('result').classList.add('show');updateDashboard()}
+function clearText(){document.getElementById('input').value='';document.getElementById('result').classList.remove('show')}function copySummary(){navigator.clipboard?.writeText(document.getElementById('summary').textContent);show('Copied!','Summary copied to clipboard.')}
+function show(t,x){document.getElementById('mt').textContent=t;document.getElementById('mx').textContent=x;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
+function openAuth(m='login'){authMode=m;document.getElementById('authTitle').textContent=m==='login'?'Sign in to NEXORA':'Create your NEXORA account';document.getElementById('authName').style.display=m==='login'?'none':'block';document.getElementById('authSwitch').textContent=m==='login'?'Create account':'Already have an account? Sign in';document.getElementById('authMsg').textContent='';document.getElementById('authModal').classList.add('show')}
+function closeAuth(){document.getElementById('authModal').classList.remove('show')}function toggleAuthMode(){openAuth(authMode==='login'?'signup':'login')}
+function submitAuth(){let name=document.getElementById('authName').value.trim(),email=document.getElementById('authEmail').value.trim().toLowerCase(),password=document.getElementById('authPassword').value,msg=document.getElementById('authMsg');if(!email||!password||(authMode==='signup'&&!name)){msg.textContent='Please fill in all required fields.';return}if(password.length<6){msg.textContent='Password must be at least 6 characters.';return}let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(authMode==='signup'){if(users[email]){msg.textContent='Account already exists.';return}users[email]={name,email,password,plan:'Free'};localStorage.setItem('shorterUsers',JSON.stringify(users))}else if(!users[email]||users[email].password!==password){msg.textContent='Incorrect email or password.';return}currentUser=users[email];localStorage.setItem('shorterUser',JSON.stringify(currentUser));closeAuth();showDashboard();try{nxShowApp();}catch(e){}let pending=localStorage.getItem('shorterPendingPlan');if(pending)choosePro(pending);let after=localStorage.getItem('shorterAfterLogin');if(after==='student'){localStorage.removeItem('shorterAfterLogin');setTimeout(openStudent,150)}}
+function logout(){
+ currentUser=null;
+ localStorage.removeItem('shorterUser');
+ document.body.classList.remove('nx-logged-in');
+ document.getElementById('nxApp').style.display='none';
+ document.getElementById('dashboard').classList.remove('show');
+ document.getElementById('authBtn').textContent='Sign in';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function showDashboard(){
+ if(!currentUser)return;
+ document.getElementById('authBtn').textContent='Dashboard';
+ try{nxShowApp();}catch(e){}
+ updateDashboard();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function updateDashboard(){if(!currentUser)return;document.getElementById('welcomeName').textContent='Welcome, '+currentUser.name+'!';document.getElementById('accountEmail').textContent=currentUser.email;document.getElementById('summaryCount').textContent=used;document.getElementById('planName').textContent=currentUser.plan||'Free';let sp=document.getElementById('studentStatus');if(sp)sp.textContent=currentUser.studentProfile?'Ready':'Not set';let box=document.getElementById('studentPlanPreview');if(box&&currentUser.studentProfile){let p=currentUser.studentProfile;box.style.display='block';document.getElementById('studentPlanTitle').textContent=p.goalText||'Your Study Goal';let detail=[p.type==='school'?p.board+' • '+p.cls:p.degree+' • '+p.year,p.stream?'Stream: '+p.stream:'',p.competitiveExam?'Exam: '+p.competitiveExam:'',p.time?'Study time: '+p.time:'',p.level?'Level: '+p.level:''].filter(Boolean).join(' | ');document.getElementById('studentPlanDetails').textContent=detail||'Your profile is saved.';let pl=document.getElementById('studentPlanner');if(pl){pl.style.display='block';makePlanner(p)}}else if(box){box.style.display='none'}}
+function closeProfileSuccess(){
+  closeModal();
+  showDashboard();
+  const planner=document.getElementById('studentPlanner');
+  if(planner && currentUser && currentUser.studentProfile){
+    planner.style.display='block';
+    makePlanner(currentUser.studentProfile);
+    setTimeout(()=>planner.scrollIntoView({behavior:'smooth',block:'start'}),150);
+  }
+}
+function isPro(){return currentUser&&currentUser.plan==='Pro'}function scrollToPricing(){document.getElementById('pricing').scrollIntoView({behavior:'smooth'})}
+function choosePlan(plan){if(!currentUser){localStorage.setItem('shorterPendingPlan',plan);openAuth('login');return}choosePro(plan)}
+function choosePro(plan){currentUser.plan='Pro';localStorage.setItem('shorterUser',JSON.stringify(currentUser));let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');if(users[currentUser.email]){users[currentUser.email].plan='Pro';localStorage.setItem('shorterUsers',JSON.stringify(users))}localStorage.removeItem('shorterPendingPlan');showDashboard();show('NEXORA Pro','Demo activation complete for '+plan+'. Connect a real payment provider before accepting real payments.')}
+function creatorTrial(){if(!currentUser)return openAuth('signup');choosePro('30-day Creator Pro trial')}
+function downloadWallpaper(name){show('Download selected',name+' — connect file storage to enable real downloads.')}
+function quickSearch(value){document.getElementById('input').value=value;document.getElementById('input').focus()}
+window.addEventListener('load',()=>{if(currentUser){try{nxShowApp();}catch(e){}showDashboard();}});
+
+function openStudent(){
+  if(!currentUser){
+    localStorage.setItem('shorterAfterLogin','student');
+    openAuth('login');
+    return;
+  }
+  setStudyType('school');
+  document.getElementById('otherBoardWrap').style.display='none';
+  renderSubjects('school');
+  document.getElementById('studentModal').classList.add('show');
+}
+
+function closeStudent(){
+  document.getElementById('studentModal').classList.remove('show');
+}
+
+const subjectSets={
+ primary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
+ secondary:['Mathematics','Science','English','Hindi','Social Science','Computer / IT','Sanskrit / Third Language','Other'],
+ science:['Physics','Chemistry','Mathematics','Biology','English','Computer Science','Physical Education','Other'],
+ commerce:['Accountancy','Business Studies','Economics','Mathematics / Applied Mathematics','English','Computer Science','Physical Education','Other'],
+ humanities:['History','Geography','Political Science','Economics','English','Sociology','Psychology','Physical Education','Other'],
+ college:['Physics','Chemistry','Mathematics','Biology','English','Accountancy','Business Studies','Economics','History','Geography','Political Science','Computer / IT','Other']
+};
+function getSchoolClass(){
+ const value=document.getElementById('studentClass').value;
+ const n=parseInt((value||'').replace(/\D/g,''),10);
+ return Number.isNaN(n)?0:n;
+}
+function renderSubjects(type='school'){
+ const box=document.getElementById('subjectList');
+ if(type==='college'){
+   box.innerHTML=subjectSets.college.map(subjectCheckbox).join('');
+   return;
+ }
+ const n=getSchoolClass();
+ let arr=n>=11 ? (document.getElementById('streamSelect')?.value==='commerce'?subjectSets.commerce:
+   document.getElementById('streamSelect')?.value==='humanities'?subjectSets.humanities:subjectSets.science)
+   : (n>=9?subjectSets.secondary:subjectSets.primary);
+ box.innerHTML=arr.map(subjectCheckbox).join('');
+}
+function subjectCheckbox(x){return '<label><input type="checkbox" value="'+x+'"> '+x+'</label>'}
+function updateClassFields(){
+ const n=getSchoolClass();
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=n>=11?'flex':'none';
+ renderSubjects('school');
+}
+function setStudyType(type){
+ document.getElementById('schoolBtn').classList.toggle('active',type==='school');
+ document.getElementById('collegeBtn').classList.toggle('active',type==='college');
+ document.getElementById('boardWrap').style.display=type==='school'?'block':'none';
+ document.getElementById('classWrap').style.display=type==='school'?'block':'none';
+ ['collegeWrap','branchWrap','yearWrap'].forEach(id=>document.getElementById(id).style.display=type==='college'?'flex':'none');
+ const streamWrap=document.getElementById('streamWrap');
+ if(streamWrap) streamWrap.style.display=type==='school'&&getSchoolClass()>=11?'flex':'none';
+ renderSubjects(type);
+}
+function boardChanged(){
+  const value=document.getElementById('boardSelect').value;
+  document.getElementById('otherBoardWrap').style.display=value==='Other'?'flex':'none';
+}
+function streamChanged(){
+  const value=document.getElementById('streamSelect').value;
+  document.getElementById('otherStreamWrap').style.display=value==='other'?'flex':'none';
+  renderSubjects('school');
+}
+function competitiveExamChanged(){
+  const value=document.getElementById('competitiveExam').value;
+  document.getElementById('otherExamWrap').style.display=value==='Other'?'flex':'none';
+}
+function goalChanged(){let g=document.getElementById('studentGoal').value;document.getElementById('competitiveWrap').style.display=g==='competitive'?'block':'none';document.getElementById('percentWrap').style.display=g==='percent'?'block':'none';document.getElementById('customWrap').style.display=g==='custom'?'block':'none'}
+function createStudentProfile(){
+ if(!currentUser){openAuth('signup');return}
+ let school=document.getElementById('schoolBtn').classList.contains('active'),board=document.getElementById('boardSelect').value,cls=document.getElementById('studentClass').value,degree=document.getElementById('degree').value.trim(),branch=document.getElementById('branch').value.trim(),year=document.getElementById('year').value.trim(),g=document.getElementById('studentGoal').value,exam=document.getElementById('competitiveExam').value,subjects=[...document.querySelectorAll('#subjectList input:checked')].map(x=>x.value),time=document.getElementById('studyTime').value,level=document.getElementById('level').value,err=document.getElementById('studentError');
+ if(school&&(!board||!cls)){err.textContent='Please select your board and class.';return}
+ if(school&&board==='Other'&&!document.getElementById('otherBoard').value.trim()){err.textContent='Please write your board.';return}
+ if(school&&board==='Other') board=document.getElementById('otherBoard').value.trim();
+ if(school&&getSchoolClass()>=11&&!document.getElementById('streamSelect').value){err.textContent='Please select your Class 11–12 stream.';return}
+ if(school&&getSchoolClass()>=11&&document.getElementById('streamSelect').value==='other'&&!document.getElementById('otherStream').value.trim()){err.textContent='Please write your stream.';return}
+ if(!school&&(!degree||!year)){err.textContent='Please enter your degree and year/semester.';return}
+ if(!g){err.textContent='Please select your goal.';return}
+ if(g==='competitive'&&!exam){err.textContent='Please select which competitive exam you are preparing for.';return}
+ if(g==='competitive'&&exam==='Other'&&!document.getElementById('otherExam').value.trim()){err.textContent='Please write the competitive exam name.';return}
+ if(g==='percent'&&!document.getElementById('targetPercent').value){err.textContent='Please enter your target percentage.';return}
+ if(g==='custom'&&!document.getElementById('customGoal').value.trim()){err.textContent='Please write your custom goal.';return}
+ if(!subjects.length||!time){err.textContent='Please select at least one subject and your daily study time.';return}
+ if(g==='competitive'&&exam==='Other') exam=document.getElementById('otherExam').value.trim();
+ let customStream=school&&document.getElementById('streamSelect').value==='other'?document.getElementById('otherStream').value.trim():'';
+ let goalText={top:'Top my current class',percent:'Achieve '+document.getElementById('targetPercent').value+'%',subject:'Become strong in a subject',exam:'Prepare for my current exam',competitive:'Prepare for '+exam,next:'Prepare for the next class',future:'Prepare for a future exam',custom:document.getElementById('customGoal').value.trim()}[g];
+ currentUser.studentProfile={type:school?'school':'college',board,cls,stream:school?(document.getElementById('streamSelect').value==='other'?customStream:document.getElementById('streamSelect').value):'',degree,branch,year,goal:g,goalText,competitiveExam:exam,subjects,time,level,strong:document.getElementById('strongSubjects').value.trim(),weak:document.getElementById('weakSubjects').value.trim()};
+ let users=JSON.parse(localStorage.getItem('shorterUsers')||'{}');users[currentUser.email]=currentUser;localStorage.setItem('shorterUsers',JSON.stringify(users));localStorage.setItem('shorterUser',JSON.stringify(currentUser));
+ closeStudent();
+showDashboard();
+try{nxShowApp();nxGo('home');}catch(e){}
+show('Your Study Plan is ready!','NEXORA created your timetable, daily tasks, 21-day test cycle and goal roadmap. Open Today or Roadmap from the app navigation.');
+}
+
+function plannerMinutes(v){if(!v)return 60;if(v.includes('30'))return 30;if(v.includes('1 hour'))return 60;if(v.includes('2 hours'))return 120;if(v.includes('3 hours'))return 180;return 240}
+function plannerWeak(x,p){return (p.weak||'').toLowerCase().split(',').some(w=>w.trim()&&x.toLowerCase().includes(w.trim()))}
+function plannerTasks(p,day){let a=(p.subjects||[]).filter(Boolean),m=plannerMinutes(p.time);if(!a.length)return[];if([7,14,21].includes(day))return[{id:'test'+day,title:'Take a timed test',meta:'Test day • '+Math.max(20,Math.round(m*.55))+' min'},{id:'review'+day,title:'Review mistakes',meta:'Analyse wrong answers'},{id:'weak'+day,title:'Update weak topics',meta:'Use mistakes for the next plan'}];let w=a.map(x=>plannerWeak(x,p)?1.6:1),sum=w.reduce((x,y)=>x+y,0);return a.map((x,i)=>({id:'d'+day+i,title:(plannerWeak(x,p)?'Focus: ':'Study: ')+x,meta:Math.max(10,Math.round(m*w[i]/sum))+' min • concepts + practice'}))}
+function plannerKey(){return currentUser&&currentUser.email?'shorterPlanner_'+currentUser.email:'shorterPlanner'}
+function togglePlannerTask(id,checked){let d=JSON.parse(localStorage.getItem(plannerKey())||'{}');d[id]=checked;localStorage.setItem(plannerKey(),JSON.stringify(d));updatePlannerProgress()}
+function updatePlannerProgress(){let d=JSON.parse(localStorage.getItem(plannerKey())||'{}'),n=Object.values(d).filter(Boolean).length,p=Math.min(100,Math.round(n/63*100));let f=document.getElementById('plannerProgressFill'),t=document.getElementById('plannerProgressText');if(f)f.style.width=p+'%';if(t)t.textContent=p+'%';document.querySelectorAll('#todayTasks .task-row').forEach(r=>{let c=r.querySelector('input');if(c&&d[r.dataset.task]){c.checked=true;r.classList.add('done')}})}
+function makePlanner(p){let a=(p.subjects||[]).filter(Boolean),w=a.filter(x=>plannerWeak(x,p)),m=plannerMinutes(p.time);document.getElementById('plannerGoalLine').textContent=(p.goalText||'Your goal')+' • '+m+' min/day';document.getElementById('plannerFocusNote').innerHTML='<b>Adaptive focus:</b> '+(w.length?'Extra practice is reserved for '+w.join(', ')+'.':'Balanced time across your selected subjects.')+' Tests are planned for days 7, 14 and 21.';let today=plannerTasks(p,1);document.getElementById('todayTasks').innerHTML=today.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="togglePlannerTask(\''+x.id+'\',this.checked)"><span><span class="task-title">'+x.title+'</span><div class="task-meta">'+x.meta+'</div></span></label>').join('');document.getElementById('weekTasks').innerHTML=Array.from({length:7},(_,i)=>'<div class="task-row"><span>•</span><span class="task-title">Day '+(i+1)+': '+(i===6?'test + mistake review':(w.length?'extra '+w[0]+' practice + daily subject work':'complete your daily subject work'))+'</span></div>').join('');document.getElementById('testPlan').innerHTML=['Day 7 — progress test','Day 14 — progress test','Day 21 — final test + review'].map(x=>'<div class="task-row"><span>📝</span><span class="task-title">'+x+'</span></div>').join('');let steps=[['1','Foundation','Days 1–7: build the routine, study core topics and take the first test.'],['2','Practice','Days 8–14: increase question practice and focus on weak areas.'],['3','Improve','Days 15–21: revise mistakes and strengthen weak topics.'],['4','Repeat','After Day 21: use test mistakes and unfinished work to build the next cycle.']];document.getElementById('roadmapList').innerHTML=steps.map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="muted">'+x[2]+'</div></div></div>').join('');updatePlannerProgress()}
+
+function nxProfile(){return (typeof currentUser!=='undefined'&&currentUser)?currentUser.studentProfile:null}
+function nxEsc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function nxPlannerData(){return JSON.parse(localStorage.getItem((currentUser&&currentUser.email?'shorterPlanner_':'shorterPlanner_')+(currentUser?.email||'x'))||'{}')}
+function nxShowApp(){
+ document.body.classList.add('nx-logged-in');
+ const app=document.getElementById('nxApp'); if(!app)return;
+ app.style.display='block';
+ if(nxProfile()){nxRender();}
+ else{
+   document.getElementById('nxHello').textContent='Welcome back 👋';
+   document.getElementById('nxGoal').textContent='Set your first study goal';
+   document.getElementById('nxGoalSmall').textContent='Create your student profile to build your timetable.';
+   document.getElementById('nxGoalMeta').textContent='Your personalized plan will appear here.';
+   document.getElementById('nxTodayTasks').innerHTML='<div class="nx-sub">Complete Student Setup to generate today’s tasks.</div>';
+   document.getElementById('nxRoadmapContent').innerHTML='<div class="nx-sub">Your roadmap will be created after you choose your goal.</div>';
+   document.getElementById('nxProfileDetails').innerHTML='<div class="nx-sub">No student profile yet.</div>';
+   document.getElementById('nxGoalHistory').innerHTML='<div class="nx-sub">No completed goals yet.</div>';
+ }
+}
+function nxGo(page){
+ ['home','today','roadmap','profile','settings'].forEach(x=>document.getElementById('nx'+x[0].toUpperCase()+x.slice(1))?.classList.remove('active'));
+ const el=document.getElementById('nx'+page[0].toUpperCase()+page.slice(1));if(el)el.classList.add('active');
+ document.querySelectorAll('.nx-nav button').forEach(b=>b.classList.remove('active'));
+ const nb=document.getElementById('nxNav'+page[0].toUpperCase()+page.slice(1));if(nb)nb.classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function nxOpenProfile(){nxGo('profile')}
+function nxOpenSettings(){nxGo('settings')}
+function nxRender(){
+ const p=nxProfile();if(!p)return;
+ const name=(p.name||currentUser?.name||'Student').split(' ')[0];
+ document.getElementById('nxHello').textContent='Welcome back, '+name+' 👋';
+ document.getElementById('nxGoal').textContent=p.goalText||'Your active goal';
+ document.getElementById('nxGoalSmall').textContent=(p.class||p.degree||'Student')+' • '+(p.board||'') ;
+ document.getElementById('nxGoalMeta').textContent=[p.class||p.degree,p.board,p.competitiveExam].filter(Boolean).join(' • ');
+ document.getElementById('nxAccount').textContent=currentUser?.email||'Signed in';
+ const weak=(p.weak||'').trim();document.getElementById('nxFocus').textContent=weak?weak.split(',')[0]:'Balanced';
+ const tasks=nxTodayTasks(p);document.getElementById('nxTodayTasks').innerHTML=tasks;
+ document.getElementById('nxRoadmapContent').innerHTML=nxRoadmap(p);
+ document.getElementById('nxProfileDetails').innerHTML=[
+ ['Class / Degree',p.class||p.degree],['Board',p.board],['Stream',p.stream],['Subjects',(p.subjects||[]).join(', ')],
+ ['Goal',p.goalText],['Competitive Exam',p.competitiveExam],['Study Time',p.time],['Weak Subjects',p.weak]
+ ].filter(x=>x[1]).map(x=>'<div class="nx-profile-row"><span>'+nxEsc(x[0])+'</span><b>'+nxEsc(x[1])+'</b></div>').join('');
+ nxHistory();
+ const store=nxPlannerData(),done=Object.values(store).filter(Boolean).length,pct=Math.min(100,Math.round(done/63*100));
+ document.getElementById('nxPct').textContent=pct+'%';document.getElementById('nxTaskCount').textContent=done;
+}
+function nxTodayTasks(p){
+ const subs=(p.subjects||[]).filter(Boolean),weak=(p.weak||'').toLowerCase(),items=[];
+ if(!subs.length)return '<p class="nx-sub">No subjects saved yet.</p>';
+ subs.forEach((sub,i)=>{
+  const isWeak=weak&&weak.split(',').some(w=>w.trim()&&sub.toLowerCase().includes(w.trim()));
+  items.push({id:'nx-'+i,title:(isWeak?'Focus: ':'Study: ')+sub,meta:(isWeak?'Extra practice • ':'Practice + revision • ')+(Math.max(15,Math.round(60/subs.length)))+' min'});
+ });
+ return items.map(x=>'<label class="task-row" data-task="'+x.id+'"><input type="checkbox" onchange="nxTask(this,\''+x.id+'\')"><span><span class="task-title">'+nxEsc(x.title)+'</span><div class="task-meta">'+nxEsc(x.meta)+'</div></span></label>').join('');
+}
+function nxTask(cb,id){
+ const key='nexora_tasks_'+(currentUser?.email||'x'),d=JSON.parse(localStorage.getItem(key)||'{}');d[id]=cb.checked;localStorage.setItem(key,JSON.stringify(d));nxRender();
+}
+function nxRoadmap(p){
+ const comp=p.competitiveExam?' for '+nxEsc(p.competitiveExam):'';
+ return [
+ ['1','Foundation','Build your daily routine and cover the core topics'+comp+'.'],
+ ['2','Practice','Increase question practice and give extra time to weak subjects.'],
+ ['3','Test & Improve','Take progress tests, analyse mistakes and revise weak topics.'],
+ ['4','Goal Completion','Finish the goal, review your progress and mark the goal complete.']
+ ].map(x=>'<div class="roadmap-step"><span class="roadmap-num">'+x[0]+'</span><div><b>'+x[1]+'</b><div class="nx-sub" style="margin-top:4px">'+x[2]+'</div></div></div>').join('');
+}
+function nxHistory(){
+ const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
+ document.getElementById('nxGoalHistory').innerHTML=h.length?h.map(x=>'<div class="nx-history"><span>'+nxEsc(x.goal)+'</span><span class="nx-complete">✓ Completed</span></div>').join(''):'<div class="nx-sub">No completed goals yet.</div>';
+}
+function nxCompleteGoal(){
+ const p=nxProfile();if(!p)return;
+ const key='nexora_goal_history_'+(currentUser?.email||'x'),h=JSON.parse(localStorage.getItem(key)||'[]');
+ h.push({goal:p.goalText||'Goal',completedAt:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(h));
+ alert('Goal completed! This ₹1499 One-Goal Premium cycle is now finished. You can set a new goal, but the new goal needs a new plan.');
+ nxRender();nxOpenProfile();
+}
+function nxEditProfile(){
+ // Reuse the existing working Student Setup editor rather than creating a second form.
+ if(typeof openStudent==='function'){openStudent();}else{alert('Profile editor is not available in this version.')}
+}
+function nxLogout(){
+ if(typeof logout==='function'){logout();return}
+ if(typeof currentUser!=='undefined'){currentUser=null;localStorage.removeItem('currentUser');location.reload();}
+}
+function nxOpenAfterLogin(){
+ if(nxProfile()){nxShowApp();}
+}
+</script>
+</body>
+</html>
